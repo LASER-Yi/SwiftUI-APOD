@@ -7,15 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC77D1E422D5E7F70095D3D4 /* ApodRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */; };
+		EC77D1E622D5EF870095D3D4 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77D1E522D5EF870095D3D4 /* AsyncImage.swift */; };
 		ECC7DF0322D4D62B00D583A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF0222D4D62B00D583A1 /* AppDelegate.swift */; };
 		ECC7DF0522D4D62B00D583A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF0422D4D62B00D583A1 /* SceneDelegate.swift */; };
 		ECC7DF0722D4D62B00D583A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF0622D4D62B00D583A1 /* ContentView.swift */; };
 		ECC7DF0922D4D62F00D583A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0822D4D62F00D583A1 /* Assets.xcassets */; };
 		ECC7DF0C22D4D62F00D583A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0B22D4D62F00D583A1 /* Preview Assets.xcassets */; };
 		ECC7DF0F22D4D62F00D583A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0D22D4D62F00D583A1 /* LaunchScreen.storyboard */; };
+		ECC7DF1B22D4D6E200D583A1 /* ApodBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1A22D4D6E200D583A1 /* ApodBlockView.swift */; };
+		ECC7DF1E22D4D80C00D583A1 /* ApodResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1D22D4D80C00D583A1 /* ApodResult.swift */; };
+		ECC7DF2022D4D8A800D583A1 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1F22D4D8A800D583A1 /* UserData.swift */; };
+		ECC8282222D637A2001F38A3 /* ApodModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282122D637A2001F38A3 /* ApodModal.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodRequest.swift; sourceTree = "<group>"; };
+		EC77D1E522D5EF870095D3D4 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		ECC7DEFF22D4D62B00D583A1 /* Apod-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apod-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECC7DF0222D4D62B00D583A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECC7DF0422D4D62B00D583A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +32,10 @@
 		ECC7DF0B22D4D62F00D583A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ECC7DF0E22D4D62F00D583A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECC7DF1022D4D62F00D583A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECC7DF1A22D4D6E200D583A1 /* ApodBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodBlockView.swift; sourceTree = "<group>"; };
+		ECC7DF1D22D4D80C00D583A1 /* ApodResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodResult.swift; sourceTree = "<group>"; };
+		ECC7DF1F22D4D8A800D583A1 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		ECC8282122D637A2001F38A3 /* ApodModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodModal.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +68,9 @@
 		ECC7DF0122D4D62B00D583A1 /* Apod-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				ECC7DF1C22D4D78A00D583A1 /* Models */,
+				ECC7DF1922D4D6CB00D583A1 /* Views */,
+				ECC7DF2522D4E51900D583A1 /* Support Views */,
 				ECC7DF0222D4D62B00D583A1 /* AppDelegate.swift */,
 				ECC7DF0422D4D62B00D583A1 /* SceneDelegate.swift */,
 				ECC7DF0622D4D62B00D583A1 /* ContentView.swift */,
@@ -73,6 +88,33 @@
 				ECC7DF0B22D4D62F00D583A1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ECC7DF1922D4D6CB00D583A1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ECC7DF1A22D4D6E200D583A1 /* ApodBlockView.swift */,
+				ECC8282122D637A2001F38A3 /* ApodModal.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ECC7DF1C22D4D78A00D583A1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ECC7DF1D22D4D80C00D583A1 /* ApodResult.swift */,
+				EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */,
+				ECC7DF1F22D4D8A800D583A1 /* UserData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		ECC7DF2522D4E51900D583A1 /* Support Views */ = {
+			isa = PBXGroup;
+			children = (
+				EC77D1E522D5EF870095D3D4 /* AsyncImage.swift */,
+			);
+			path = "Support Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,9 +188,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECC7DF2022D4D8A800D583A1 /* UserData.swift in Sources */,
+				EC77D1E622D5EF870095D3D4 /* AsyncImage.swift in Sources */,
+				EC77D1E422D5E7F70095D3D4 /* ApodRequest.swift in Sources */,
+				ECC7DF1B22D4D6E200D583A1 /* ApodBlockView.swift in Sources */,
 				ECC7DF0322D4D62B00D583A1 /* AppDelegate.swift in Sources */,
+				ECC8282222D637A2001F38A3 /* ApodModal.swift in Sources */,
 				ECC7DF0522D4D62B00D583A1 /* SceneDelegate.swift in Sources */,
 				ECC7DF0722D4D62B00D583A1 /* ContentView.swift in Sources */,
+				ECC7DF1E22D4D80C00D583A1 /* ApodResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

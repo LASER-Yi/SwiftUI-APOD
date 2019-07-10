@@ -22,15 +22,12 @@ struct AsyncImage: View {
         VStack {
             if image == nil {
                 EmptyView()
-                    .onAppear {
-                        self.isLoaded = false
-                    }
             }else {
                 Image(uiImage: image!)
+                    .renderingMode(.original)
+                    .resizable()
+                    .scaledToFill()
                     .animation(.basic())
-                    .onAppear {
-                        self.isLoaded = true
-                    }
             }
             
         }
@@ -46,10 +43,9 @@ struct AsyncImage: View {
         loadTask = URLSession.shared.dataTaskPublisher(for: url)
             .map { (data, response) -> UIImage? in
                 return UIImage(data: data)
-        }
-        .replaceError(with: nil)
+            }
+            .replaceError(with: nil)
             .assign(to: \.image, on: self)
-        
     }
 }
 
