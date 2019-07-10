@@ -14,13 +14,20 @@ struct ApodModal : View {
     var body: some View {
         
         VStack {
-            AsyncImage(url: apod.hdurl!, isLoaded: .constant(false))
-                .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 400.0)
-                .clipped()
-                .edgesIgnoringSafeArea(.top)
-                .edgesIgnoringSafeArea(.leading)
-                .edgesIgnoringSafeArea(.trailing)
-                .background(Color.white)
+            if apod.hdurl != nil {
+                AsyncImage(url: apod.hdurl!, isLoaded: .constant(false))
+                    .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 400.0)
+                    .clipped()
+                    .edgesIgnoringSafeArea(.top)
+                    .edgesIgnoringSafeArea(.leading)
+                    .edgesIgnoringSafeArea(.trailing)
+                    .background(Color.white)
+            }else {
+                Text("Video Content")
+                    .bold()
+                    .font(.largeTitle)
+            }
+            
             
             List {
                 VStack(alignment: .leading, spacing: 4) {

@@ -15,18 +15,19 @@ final class UserData: BindableObject, Subscriber {
     }
     
     func receive(_ input: Input) -> Subscribers.Demand {
-        if let apod = input {
-            serverData = apod
-            return .none
+        serverData = input
+        if serverData.count == 0 {
+            return .max(1)
+        }else {
+            return .none            
         }
-        return .max(1)
     }
     
     func receive(completion: Subscribers.Completion<Failure>) {
         
     }
     
-    typealias Input = ApodResult?
+    typealias Input = [ApodResult]
     
     typealias Failure = URLSession.DataTaskPublisher.Failure
     
@@ -35,6 +36,7 @@ final class UserData: BindableObject, Subscriber {
     func requestApod() {
         var requestObj = ApodRequest(api_key: apiKey)
         requestObj.hd = true
+        requestObj.count = 10
         
         requestObj.makeRequest(subscriber: self)
     }
@@ -51,7 +53,7 @@ final class UserData: BindableObject, Subscriber {
         }
     }
     
-    var serverData: ApodResult? = nil {
+    var serverData: [ApodResult] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.didChange.send(self)

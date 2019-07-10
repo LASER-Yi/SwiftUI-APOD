@@ -22,7 +22,7 @@ struct ApodBlockView : View {
                         .frame(width: frameWidth, height: frameHeight)
                         .background(Color.white)
                 }else {
-                    Text("Today is Video Content")
+                    Text("Video Content")
                         .frame(width: frameWidth, height: frameHeight)
                         .background(Color.white)
                 }
@@ -42,17 +42,18 @@ struct ApodBlockView : View {
                             .color(.white)
                             .bold()
                             .lineLimit(2)
+                            .truncationMode(.tail)
                         
                     }
-                    .frame(maxWidth: frameWidth, alignment: .leading)
-                        .padding(.leading, 18)
-                        .padding(.trailing, 18)
-                        .padding(.bottom, 12)
+                    .frame(maxWidth: frameWidth - 36, alignment: .leading)
+                    .padding(.leading, 18)
+                    .padding(.trailing, 18)
+                    .padding(.bottom, 12)
                 }
             }
             .cornerRadius(8)
-                .clipped()
-                .shadow(radius: 4)
+            .clipped()
+            .shadow(radius: 4)
         }
     }
 }
@@ -60,7 +61,14 @@ struct ApodBlockView : View {
 #if DEBUG
 struct ApodBlockView_Previews : PreviewProvider {
     static var previews: some View {
-        ApodBlockView(apod: testData)
+        ScrollView {
+            VStack(spacing: 32){
+                ApodBlockView(apod: testData)
+                ApodBlockView(apod: testData)
+            }
+            
+        }
+        
     }
 }
 #endif

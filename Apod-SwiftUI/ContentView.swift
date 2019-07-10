@@ -21,7 +21,7 @@ struct ContentView : View {
         NavigationView{
             ScrollView {
                 VStack(spacing: 32) {
-                    if userData.serverData == nil {
+                    if userData.serverData.count == 0 {
                         VStack {
                             Image(systemName: "icloud")
                                 .imageScale(.large)
@@ -31,13 +31,17 @@ struct ContentView : View {
                         }
                         .offset(x: 0, y: 200)
                     }else {
-                        ApodBlockView(apod: userData.serverData!)
+                        ForEach(userData.serverData.identified(by: \.self)) { apod in
+                            ApodBlockView(apod: apod)
+                        }
                     }
                 }
+                .frame(width: UIScreen.main.bounds.width)
             }
             .navigationBarTitle(Text("APOD"))
             .navigationBarItems(leading: Text(currentDateStr).font(.subheadline).bold().color(.gray))
         }
+        
         .onAppear {
             self.userData.requestApod()
         }

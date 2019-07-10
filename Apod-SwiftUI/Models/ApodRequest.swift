@@ -70,7 +70,7 @@ struct ApodRequest {
         return dic
     }
     
-    func makeRequest<S>(subscriber: S) where S: Subscriber, S.Failure == URLSession.DataTaskPublisher.Failure, S.Input == ApodResult?
+    func makeRequest<S>(subscriber: S) where S: Subscriber, S.Failure == URLSession.DataTaskPublisher.Failure, S.Input == [ApodResult]
     {
         let header = makeRequestHeader().map { (key, value) -> URLQueryItem in
             URLQueryItem(name: key, value: value)
@@ -85,9 +85,17 @@ struct ApodRequest {
         request.httpMethod = "GET"
         
         URLSession.shared.dataTaskPublisher(for: request)
-            .map { (data, response) -> ApodResult? in
+            .map { (data, response) -> [ApodResult] in
+                var results: [ApodResult] = []
                 let decoder = JSONDecoder()
-                return try? decoder.decode(ApodResult.self, from: data)
+                
+                if let array = try? decoder.decode(Array<ApodResult>.self, from: data) {
+                    results.append(contentsOf: array)
+                }else if let single = try? decoder.decode(ApodResult.self, from: data) {
+                    results.append(single)
+                }
+                
+                return results
         }
         .receive(subscriber: subscriber)
     }
