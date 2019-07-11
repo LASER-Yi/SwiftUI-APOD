@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ApodModal : View {
+struct ApodModalView : View {
     let apod: ApodResult
     
     var body: some View {
@@ -43,11 +43,13 @@ struct ApodModal : View {
                 
                 
                 Text(apod.explanation)
-                    .frame(minHeight: 600)
                     .font(.body)
-                    .relativeHeight(1)
                     .lineLimit(nil)
                     .multilineTextAlignment(.leading)
+                
+                if apod.copyright != nil {
+                    Text("©\(apod.copyright!)")
+                }
             }
         }
     }
@@ -56,7 +58,7 @@ struct ApodModal : View {
 #if DEBUG
 struct ApodModal_Previews : PreviewProvider {
     static var previews: some View {
-        ApodModal(apod: testData)
+        ApodModalView(apod: testData)
     }
 }
 #endif

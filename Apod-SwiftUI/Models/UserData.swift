@@ -15,7 +15,7 @@ final class UserData: BindableObject {
     
     init() {
 #if DEBUG
-        serverData = testArray
+        serverData = [testData]
         self.needReload = false
 #endif
     }
@@ -33,7 +33,7 @@ final class UserData: BindableObject {
         self.needReload = true
     }
     
-    var apiKey: String = "Xb1080KHQwOEaBYyrUDN6e4YAmqVx0ng71NAVt8k" {
+    var apiKey: String = "DEMO_KEY" {
         didSet {
             didChange.send(self)
         }
@@ -56,6 +56,7 @@ final class UserData: BindableObject {
     enum ApodLoadType: String, CaseIterable {
         case recent = "Recent"
         case random = "Random"
+        //case saved = "Saved"
     }
     
     var loadType: ApodLoadType = .recent {
