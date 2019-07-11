@@ -15,12 +15,13 @@
 		ECC7DF0922D4D62F00D583A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0822D4D62F00D583A1 /* Assets.xcassets */; };
 		ECC7DF0C22D4D62F00D583A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0B22D4D62F00D583A1 /* Preview Assets.xcassets */; };
 		ECC7DF0F22D4D62F00D583A1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0D22D4D62F00D583A1 /* LaunchScreen.storyboard */; };
-		ECC7DF1B22D4D6E200D583A1 /* ApodTitleBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1A22D4D6E200D583A1 /* ApodTitleBlock.swift */; };
+		ECC7DF1B22D4D6E200D583A1 /* ApodBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1A22D4D6E200D583A1 /* ApodBlockView.swift */; };
 		ECC7DF1E22D4D80C00D583A1 /* ApodResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1D22D4D80C00D583A1 /* ApodResult.swift */; };
 		ECC7DF2022D4D8A800D583A1 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1F22D4D8A800D583A1 /* UserData.swift */; };
 		ECC8282222D637A2001F38A3 /* ApodModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282122D637A2001F38A3 /* ApodModalView.swift */; };
 		ECC8282422D71775001F38A3 /* WaterfallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282322D71775001F38A3 /* WaterfallView.swift */; };
 		ECC8282622D71A50001F38A3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282522D71A50001F38A3 /* SettingView.swift */; };
+		ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282722D78BC8001F38A3 /* WebView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,12 +35,13 @@
 		ECC7DF0B22D4D62F00D583A1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		ECC7DF0E22D4D62F00D583A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECC7DF1022D4D62F00D583A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ECC7DF1A22D4D6E200D583A1 /* ApodTitleBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodTitleBlock.swift; sourceTree = "<group>"; };
+		ECC7DF1A22D4D6E200D583A1 /* ApodBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodBlockView.swift; sourceTree = "<group>"; };
 		ECC7DF1D22D4D80C00D583A1 /* ApodResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodResult.swift; sourceTree = "<group>"; };
 		ECC7DF1F22D4D8A800D583A1 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		ECC8282122D637A2001F38A3 /* ApodModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodModalView.swift; sourceTree = "<group>"; };
 		ECC8282322D71775001F38A3 /* WaterfallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallView.swift; sourceTree = "<group>"; };
 		ECC8282522D71A50001F38A3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		ECC8282722D78BC8001F38A3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,7 +99,7 @@
 		ECC7DF1922D4D6CB00D583A1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				ECC7DF1A22D4D6E200D583A1 /* ApodTitleBlock.swift */,
+				ECC7DF1A22D4D6E200D583A1 /* ApodBlockView.swift */,
 				ECC8282122D637A2001F38A3 /* ApodModalView.swift */,
 				ECC8282322D71775001F38A3 /* WaterfallView.swift */,
 				ECC8282522D71A50001F38A3 /* SettingView.swift */,
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				EC77D1E522D5EF870095D3D4 /* AsyncImage.swift */,
+				ECC8282722D78BC8001F38A3 /* WebView.swift */,
 			);
 			path = "Support Views";
 			sourceTree = "<group>";
@@ -197,12 +200,13 @@
 				ECC7DF2022D4D8A800D583A1 /* UserData.swift in Sources */,
 				EC77D1E622D5EF870095D3D4 /* AsyncImage.swift in Sources */,
 				EC77D1E422D5E7F70095D3D4 /* ApodRequest.swift in Sources */,
-				ECC7DF1B22D4D6E200D583A1 /* ApodTitleBlock.swift in Sources */,
+				ECC7DF1B22D4D6E200D583A1 /* ApodBlockView.swift in Sources */,
 				ECC7DF0322D4D62B00D583A1 /* AppDelegate.swift in Sources */,
 				ECC8282222D637A2001F38A3 /* ApodModalView.swift in Sources */,
 				ECC7DF0522D4D62B00D583A1 /* SceneDelegate.swift in Sources */,
 				ECC7DF0722D4D62B00D583A1 /* ContentView.swift in Sources */,
 				ECC7DF1E22D4D80C00D583A1 /* ApodResult.swift in Sources */,
+				ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */,
 				ECC8282422D71775001F38A3 /* WaterfallView.swift in Sources */,
 				ECC8282622D71A50001F38A3 /* SettingView.swift in Sources */,
 			);

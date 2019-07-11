@@ -9,13 +9,16 @@
 import SwiftUI
 
 struct ApodModalView : View {
+    
     let apod: ApodResult
+    
+    @Binding var loadedImage: UIImage?
     
     var body: some View {
         
-        VStack {
+        VStack(spacing: 0) {
             if apod.hdurl != nil {
-                AsyncImage(url: apod.hdurl!, isLoaded: .constant(false))
+                AsyncImage(url: apod.hdurl!, image: $loadedImage)
                     .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 400.0)
                     .clipped()
                     .edgesIgnoringSafeArea(.top)
@@ -23,9 +26,9 @@ struct ApodModalView : View {
                     .edgesIgnoringSafeArea(.trailing)
                     .background(Color.white)
             }else {
-                Text("Video Content")
-                    .bold()
-                    .font(.largeTitle)
+                WebView(request: .init(url: apod.url!))
+                    .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 400.0)
+                    .clipped()
             }
             
             
@@ -48,7 +51,7 @@ struct ApodModalView : View {
                     .multilineTextAlignment(.leading)
                 
                 if apod.copyright != nil {
-                    Text("©\(apod.copyright!)")
+                    Text("© \(apod.copyright!)")
                 }
             }
         }
@@ -58,7 +61,7 @@ struct ApodModalView : View {
 #if DEBUG
 struct ApodModal_Previews : PreviewProvider {
     static var previews: some View {
-        ApodModalView(apod: testData)
+        ApodModalView(apod: testData, loadedImage: .constant(nil))
     }
 }
 #endif

@@ -37,6 +37,8 @@ struct WaterfallView : View {
                     }) {
                         Image(systemName: "arrow.2.circlepath.circle")
                             .imageScale(.large)
+                            .rotationEffect(Angle(degrees: userData.needReload ? 180 : 0))
+                            .animation(.fluidSpring())
                             .disabled(userData.loadType == .recent || userData.needReload == true)
                     }
                 }
@@ -56,36 +58,12 @@ struct WaterfallView : View {
                 }
             }
             .padding(.leading, 48)
-                .padding(.trailing, 48)
+            .padding(.trailing, 48)
             
-            VStack(spacing: 32) {
-                
-                if userData.serverData.count == 0 {
-                    VStack {
-                        Image(systemName: "icloud")
-                            .imageScale(.large)
-                            .padding(.bottom, 4)
-                        
-                        Text("Loading")
-                    }
-                    .offset(x: 0, y: 200)
-                }else {
-                    ForEach(userData.serverData.identified(by: \.self)) { apod in
-                        ApodTitleBlock(apod: apod)
-                    }
-                    
-                    Divider()
-                    
-                    Button(action: {
-                        
-                    }) {
-                        Text("More...")
-                    }
-                }
-            }
-            .frame(width: UIScreen.main.bounds.width)
+            WaterfallCards(apods: $userData.serverData)
                 .padding(.top, 24)
                 .padding(.bottom, 24)
+            
         }
         .onAppear {
             self.userData.requestApod()
@@ -102,3 +80,42 @@ struct WaterfallView_Previews : PreviewProvider {
     }
 }
 #endif
+
+struct WaterfallCards : View {
+    
+    var scaleTrans: AnyTransition {
+        let insertion = AnyTransition
+            .move(edge: .bottom)
+            .combined(with: .opacity)
+        
+        let removal = AnyTransition
+            .scale()
+            .combined(with: .opacity)
+        
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
+    
+    @Binding var apods: [ApodResult]
+    
+    var body: some View {
+        VStack(spacing: 32) {
+            if apods.isEmpty {
+                VStack {
+                    Image(systemName: "icloud")
+                        .imageScale(.large)
+                        .padding(.bottom, 4)
+                    
+                        Text("Loading")
+                    }
+                    .offset(x: 0, y: 200)
+            }else {
+                ForEach(apods.identified(by: \.self)) { apod in
+                    ApodBlockView(apod: apod)
+                }
+                
+            }
+        }
+        .frame(width: UIScreen.main.bounds.width)
+
+    }
+}

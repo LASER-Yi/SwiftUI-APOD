@@ -15,7 +15,6 @@ struct ContentView : View {
     var body: some View {
         TabbedView {
             WaterfallView()
-                .tag("waterfall")
                 .environmentObject(userData)
                 .tabItem {
                     VStack{
@@ -23,19 +22,19 @@ struct ContentView : View {
                         Text("APOD")
                     }
                 }
+                .tag("waterfall")
             
             SettingView()
-                .tag("setting")
                 .environmentObject(userData)
                 .tabItem {
                     VStack {
                         Image(systemName: "gear")
                         Text("Setting")
                     }
-            }
+                }
+                .tag("setting")
         }
     }
-    
 }
 
 #if DEBUG

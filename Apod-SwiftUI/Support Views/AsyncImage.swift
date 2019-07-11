@@ -12,9 +12,7 @@ import Combine
 struct AsyncImage: View {
     let url: URL
     
-    @Binding var isLoaded: Bool
-    
-    @State private var image: UIImage? = nil
+    @Binding var image: UIImage?
     
     @State private var loadTask: AnyCancellable? = nil
     
@@ -39,7 +37,12 @@ struct AsyncImage: View {
         }
     }
     
-    func loadImage() {
+    func setInitalImage(_ image: UIImage) -> some View{
+        self.image = image
+        return self
+    }
+    
+    private func loadImage() {
         let session = URLSession(configuration: .default)
         
         loadTask = session.dataTaskPublisher(for: url)
@@ -54,7 +57,7 @@ struct AsyncImage: View {
 #if DEBUG
 struct AsyncImage_Previews : PreviewProvider {
     static var previews: some View {
-        AsyncImage(url: URL(string: "https://img3.doubanio.com/view/status/l/public/4dc4add0fd63152.jpg")!, isLoaded: .constant(false))
+        AsyncImage(url: URL(string: "https://img3.doubanio.com/view/status/l/public/4dc4add0fd63152.jpg")!, image: .constant(nil))
             .frame(width: 300, height: 300)
             .background(Color.white)
             .cornerRadius(8)
