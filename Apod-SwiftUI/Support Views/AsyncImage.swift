@@ -40,7 +40,9 @@ struct AsyncImage: View {
     }
     
     func loadImage() {
-        loadTask = URLSession.shared.dataTaskPublisher(for: url)
+        let session = URLSession(configuration: .default)
+        
+        loadTask = session.dataTaskPublisher(for: url)
             .map { (data, response) -> UIImage? in
                 return UIImage(data: data)
             }
