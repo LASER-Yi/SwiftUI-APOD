@@ -12,6 +12,8 @@ struct ApodModalView : View {
     
     let apod: ApodResult
     
+    @State var favourite: Bool = false
+    
     @Binding var loadedImage: UIImage?
     
     var body: some View {
@@ -39,9 +41,22 @@ struct ApodModalView : View {
                         .bold()
                         .lineLimit(2)
                     
-                    Text(apod.getFormatterDate())
-                        .font(.headline)
-                        .color(.gray)
+                    HStack {
+                        Text(apod.getFormatterDate())
+                            .font(.headline)
+                            .color(.gray)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            self.favourite.toggle()
+                        }) {
+                            Image(systemName: self.favourite ? "plus.circle.fill" : "plus.circle")
+                                .imageScale(.medium)
+                                .foregroundColor(self.favourite ? .yellow : .gray)
+                        }
+                    }
+                    
                 }
                 
                 

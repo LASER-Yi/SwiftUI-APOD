@@ -36,24 +36,23 @@ struct ApodBlockView : View {
                 AsyncImage(url: apod.url!, image: $loadedImage)
                     .frame(width: frameWidth, height: frameHeight)
                     .clipped()
-                    .background(Color.init(white: 0.5))
+                    .background(Color.init(white: 0.3))
             }else {
                 Text("Video Content")
                     .color(.primary)
                     .frame(width: frameWidth, height: frameHeight)
                     .background(Color.secondary)
-                
             }
             
             VStack {
                 VStack(spacing: 4) {
                     Text(apod.getFormatterDate())
                         .font(.headline)
-                        .color(.secondary)
+                        .color(.init(white: 0.8))
                     
                         Text(apod.title)
                             .font(.title)
-                            .color(Color.primary)
+                            .color(Color.white)
                             .bold()
                             .lineLimit(nil)
                             .multilineTextAlignment(.leading)

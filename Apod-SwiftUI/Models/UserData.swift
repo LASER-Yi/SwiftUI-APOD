@@ -9,28 +9,24 @@
 import SwiftUI
 import Combine
 
+protocol ApodRequester {
+    func handleRequestError(_ msg: String)
+}
+
 final class UserData: BindableObject {
     
     let didChange = PassthroughSubject<UserData, Never>()
     
+    static let `default` = UserData()
+    
     init() {
+        
 #if DEBUG
-        serverData = [testData]
+        localApods = [testData]
+        randomApods = testArray
         self.needReload = false
 #endif
-    }
-    
-    func requestApod() {
-        var requestObj = ApodRequest(api_key: apiKey)
-        requestObj.hd = true
         
-        if self.loadType == .random {
-            requestObj.count = 10
-        }
-        
-        requestObj.makeRequest(subscriber: self)
-        
-        self.needReload = true
     }
     
     var apiKey: String = "DEMO_KEY" {
@@ -45,7 +41,15 @@ final class UserData: BindableObject {
         }
     }
     
-    var serverData: [ApodResult] = [] {
+    var localApods: [ApodResult] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.didChange.send(self)
+            }
+        }
+    }
+    
+    var randomApods: [ApodResult] = [] {
         didSet {
             DispatchQueue.main.async {
                 self.didChange.send(self)
@@ -56,7 +60,7 @@ final class UserData: BindableObject {
     enum ApodLoadType: String, CaseIterable {
         case recent = "Recent"
         case random = "Random"
-        //case saved = "Saved"
+        case saved = "Saved"
     }
     
     var loadType: ApodLoadType = .recent {
@@ -67,17 +71,36 @@ final class UserData: BindableObject {
     
     var needReload: Bool = true {
         didSet {
-            if self.needReload {
-                serverData = []
-            }else {
-                DispatchQueue.main.async {
-                    self.didChange.send(self)
-                }
+            DispatchQueue.main.async {
+                self.didChange.send(self)
             }
         }
     }
     
     var savedSubscription: Subscription? = nil
+    
+    var requester: ApodRequester? = nil
+    
+    func requestApod(_ requester: ApodRequester? = nil) {
+        self.needReload = true
+        self.requester = requester
+        
+        if self.loadType == .saved {
+            
+        }else {
+            var requestObj = ApodRequest(api_key: apiKey)
+            
+            if loadHdImage {
+                requestObj.hd = true
+            }
+            
+            if self.loadType == .random {
+                requestObj.count = 10
+            }
+            
+            requestObj.sendRequest(subscriber: self)
+        }
+    }
 }
 
 extension UserData: Subscriber {
@@ -91,10 +114,15 @@ extension UserData: Subscriber {
     }
     
     func receive(_ input: Input) -> Subscribers.Demand {
-        serverData = input
+        if self.loadType == .recent {
+            localApods = input
+        }else if self.loadType == .random {
+            randomApods = input
+        }
+        
         self.needReload = false
         
-        if serverData.count == 0 {
+        if input.count == 0 {
             return .max(1)
         }else {
             return .none
@@ -102,10 +130,17 @@ extension UserData: Subscriber {
     }
     
     func receive(completion: Subscribers.Completion<Failure>) {
+        self.handleRequestError("Network Error")
         self.needReload = false
     }
     
     typealias Input = [ApodResult]
     
     typealias Failure = URLSession.DataTaskPublisher.Failure
+}
+
+extension UserData: ApodRequester {
+    func handleRequestError(_ msg: String) {
+        requester?.handleRequestError(msg)
+    }
 }

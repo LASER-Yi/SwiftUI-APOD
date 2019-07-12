@@ -8,10 +8,6 @@
 
 import Foundation
 
-struct ApodRequestError: Error {
-    
-}
-
 struct ApodResult: Hashable, Codable {
     var copyright: String?
     var date: Date
@@ -22,6 +18,11 @@ struct ApodResult: Hashable, Codable {
     var version: String
     var title: String
     var thumbnailUrl: URL?
+    
+    struct Error: Codable {
+        var code: Int
+        var msg: String
+    }
     
     static var dateFormatter: DateFormatter {
         let fm = DateFormatter()

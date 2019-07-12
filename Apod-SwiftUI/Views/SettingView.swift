@@ -14,11 +14,17 @@ struct SettingView : View {
     
     var body: some View {
         NavigationView {
-            List {
-                Text("API Key: \(userData.apiKey)")
-                
-                Toggle(isOn: $userData.loadHdImage) {
-                    Text("Load HD Image")
+            Form {
+                Section {
+                    VStack(alignment: .leading) {
+                        Text("API Key")
+                            .bold()
+                        TextField("DEMO_KEY", text: $userData.apiKey)
+                    }
+                    
+                    Toggle(isOn: $userData.loadHdImage) {
+                        Text("Load HD Image")
+                    }
                 }
             }
             .navigationBarTitle(Text("Settings"))
