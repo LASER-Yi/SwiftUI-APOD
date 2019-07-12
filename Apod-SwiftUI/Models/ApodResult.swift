@@ -24,6 +24,14 @@ struct ApodResult: Hashable, Codable {
         var msg: String
     }
     
+    struct LimitError: Codable {
+        struct Error: Codable {
+            var code: String
+            var message: String
+        }
+        var error: Error
+    }
+    
     static var dateFormatter: DateFormatter {
         let fm = DateFormatter()
         fm.dateFormat = "YYYY-MM-dd"

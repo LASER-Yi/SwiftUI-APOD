@@ -130,8 +130,12 @@ extension UserData: Subscriber {
     }
     
     func receive(completion: Subscribers.Completion<Failure>) {
-        self.handleRequestError("Network Error")
-        self.needReload = false
+        
+        if completion != .finished {
+            self.handleRequestError("Network Error")
+            self.needReload = false
+        }
+        
     }
     
     typealias Input = [ApodResult]

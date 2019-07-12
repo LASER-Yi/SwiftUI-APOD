@@ -16,9 +16,13 @@ struct Placeholder : View {
         VStack {
             Image(systemName: systemName)
                 .imageScale(.large)
-                .padding(.bottom, 4)
+                .padding()
             
             Text(showTitle)
+                .frame(maxWidth: UIScreen.main.bounds.width)
+                .lineLimit(nil)
+                .multilineTextAlignment(.center)
+                .padding()
         }
     }
 }
@@ -26,7 +30,7 @@ struct Placeholder : View {
 #if DEBUG
 struct Placeholder_Previews : PreviewProvider {
     static var previews: some View {
-        Placeholder(systemName: "icloud", showTitle: "Loading")
+        Placeholder(systemName: "icloud", showTitle: "You have exceeded your rate limit. Try again later or contact us at https://api.nasa.gov:443/contact/ for assistance")
     }
 }
 #endif

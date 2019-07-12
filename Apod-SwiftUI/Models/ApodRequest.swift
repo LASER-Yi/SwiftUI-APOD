@@ -98,6 +98,8 @@ struct ApodRequest {
                     results.append(single)
                 }else if let error = try? decoder.decode(ApodResult.Error.self, from: data) {
                     subscriber.handleRequestError(error.msg)
+                }else if let error = try? decoder.decode(ApodResult.LimitError.self, from: data) {
+                    subscriber.handleRequestError(error.error.message)
                 }
                 
                 return results
