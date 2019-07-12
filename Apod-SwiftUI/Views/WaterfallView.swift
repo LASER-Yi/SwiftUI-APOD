@@ -15,9 +15,11 @@ struct WaterfallView : View, ApodRequester {
     }
     
     func reloadApod() {
-        loadMsg = ("icloud", "Loading")
-        
-        self.userData.requestApod(self)
+        if !userData.isLoading {
+            loadMsg = ("icloud", "Loading")
+            
+            self.userData.requestApod(self)
+        }
     }
     
     @State var loadMsg: (String, String) = ("icloud" ,"Loading")
@@ -55,7 +57,7 @@ struct WaterfallView : View, ApodRequester {
                 ApodCardList(apods: self.selectedApods())
                     .padding(.top, 24)
                     .padding(.bottom, 24)
-                    .opacity(userData.needReload ? 0.5 : 1)
+                    .opacity(userData.isLoading ? 0.5 : 1)
             }else {
                 Placeholder(
                     systemName: userData.loadType != .saved ? loadMsg.0 : "heart.slash",
@@ -103,9 +105,9 @@ struct ApodHeader: View {
                 }) {
                     Image(systemName: "arrow.2.circlepath.circle")
                         .imageScale(.large)
-                        .rotationEffect(Angle(degrees: userData.needReload ? 180 : 0))
+                        .rotationEffect(Angle(degrees: userData.isLoading ? 90 : 0))
                         .animation(.fluidSpring())
-                        .disabled(userData.needReload == true)
+                        .disabled(userData.isLoading == true)
                 }
             }
             
@@ -122,7 +124,7 @@ struct ApodHeader: View {
 struct WaterfallView_Previews : PreviewProvider {
     static var previews: some View {
         WaterfallView()
-            .environmentObject(UserData())
+            .environmentObject(UserData.test)
     }
 }
 #endif

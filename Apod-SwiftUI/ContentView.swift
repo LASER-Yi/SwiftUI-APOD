@@ -42,10 +42,10 @@ struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
-                .environmentObject(UserData())
+                .environmentObject(UserData.test)
             
             ContentView()
-                .environmentObject(UserData())
+                .environmentObject(UserData.test)
                 .colorScheme(.dark)
         }
         

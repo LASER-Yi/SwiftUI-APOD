@@ -76,7 +76,7 @@ struct ApodModalView : View {
 #if DEBUG
 struct ApodModal_Previews : PreviewProvider {
     static var previews: some View {
-        ApodModalView(apod: testData, loadedImage: .constant(nil))
+        ApodModalView(apod: UserData.test.localApods.first!, loadedImage: .constant(nil))
     }
 }
 #endif

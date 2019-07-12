@@ -30,6 +30,12 @@ struct ApodRequest {
         case api_key
     }
     
+    enum RequestError: Error {
+        case UrlError(_ error: URLError)
+        case overrateLimit
+        case other
+    }
+    
     static private let requestUrl: URL = URL(string: "https://api.nasa.gov/planetary/apod")!
     
     private var formatter: DateFormatter {
@@ -71,7 +77,7 @@ struct ApodRequest {
     }
     
     func sendRequest<S>(subscriber: S)
-    where S: Subscriber, S:ApodRequester , S.Failure == URLSession.DataTaskPublisher.Failure, S.Input == [ApodResult]
+    where S: Subscriber, S.Failure == RequestError, S.Input == [ApodResult]
     {
         let header = makeRequestHeader().map { (key, value) -> URLQueryItem in
             URLQueryItem(name: key, value: value)
@@ -86,24 +92,30 @@ struct ApodRequest {
         request.httpMethod = "GET"
         
         URLSession.shared.dataTaskPublisher(for: request)
-            .map { (data, response) -> [ApodResult] in
+            .mapError({ (error) -> RequestError in
+                RequestError.UrlError(error)
+            })
+            .tryMap({ (data, response) in
                 var results: [ApodResult] = []
                 let decoder = JSONDecoder()
                 
+#if DEBUG
                 print(String(data: data, encoding: .utf8)!)
+#endif
                 
                 if let array = try? decoder.decode(Array<ApodResult>.self, from: data) {
                     results.append(contentsOf: array)
                 }else if let single = try? decoder.decode(ApodResult.self, from: data) {
                     results.append(single)
-                }else if let error = try? decoder.decode(ApodResult.Error.self, from: data) {
-                    subscriber.handleRequestError(error.msg)
-                }else if let error = try? decoder.decode(ApodResult.LimitError.self, from: data) {
-                    subscriber.handleRequestError(error.error.message)
+                }else {
+                    throw RequestError.other
                 }
                 
                 return results
-            }
+            })
+            .mapError({ error in
+                error as! RequestError
+            })
             .receive(subscriber: subscriber)
     }
 }

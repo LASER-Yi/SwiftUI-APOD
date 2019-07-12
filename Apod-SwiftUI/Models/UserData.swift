@@ -17,17 +17,17 @@ final class UserData: BindableObject {
     
     let didChange = PassthroughSubject<UserData, Never>()
     
-    static let `default` = UserData()
-    
-    init() {
-        
+    static let shared = UserData()
 #if DEBUG
-        localApods = [testData]
-        randomApods = testArray
-        self.needReload = false
-#endif
+    static var test: UserData {
+        let data = UserData()
+        data.localApods = [testData]
+        data.randomApods = testArray
+        data.isLoading = false
         
+        return data
     }
+#endif
     
     var apiKey: String = "DEMO_KEY" {
         didSet {
@@ -69,7 +69,7 @@ final class UserData: BindableObject {
         }
     }
     
-    var needReload: Bool = true {
+    var isLoading: Bool = false {
         didSet {
             DispatchQueue.main.async {
                 self.didChange.send(self)
@@ -82,7 +82,7 @@ final class UserData: BindableObject {
     var requester: ApodRequester? = nil
     
     func requestApod(_ requester: ApodRequester? = nil) {
-        self.needReload = true
+        self.isLoading = true
         self.requester = requester
         
         if self.loadType == .saved {
@@ -120,7 +120,7 @@ extension UserData: Subscriber {
             randomApods = input
         }
         
-        self.needReload = false
+        self.isLoading = false
         
         if input.count == 0 {
             return .max(1)
@@ -131,20 +131,20 @@ extension UserData: Subscriber {
     
     func receive(completion: Subscribers.Completion<Failure>) {
         
-        if completion != .finished {
-            self.handleRequestError("Network Error")
-            self.needReload = false
+        switch completion {
+        case .finished:
+            requester = nil
+        case .failure(.UrlError(let error)):
+            requester?.handleRequestError("Network Error, Code: \(error.code)")
+        default:
+            break
         }
+        
+        self.isLoading = false
         
     }
     
     typealias Input = [ApodResult]
     
-    typealias Failure = URLSession.DataTaskPublisher.Failure
-}
-
-extension UserData: ApodRequester {
-    func handleRequestError(_ msg: String) {
-        requester?.handleRequestError(msg)
-    }
+    typealias Failure = ApodRequest.RequestError
 }

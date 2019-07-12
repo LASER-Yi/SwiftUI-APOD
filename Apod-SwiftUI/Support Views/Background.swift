@@ -10,26 +10,31 @@ import SwiftUI
 import UIKit
 
 struct Background : UIViewRepresentable {
-    let color: UIColor
+    var color: UIColor
     
     let blur: Bool
     
     init(color: UIColor = .systemBackground, blur: Bool = false) {
         self.color = color
         self.blur = blur
+        
+        
     }
     
     func makeUIView(context: UIViewRepresentableContext<Background>) -> UIVisualEffectView {
-        UIVisualEffectView(frame: .zero)
+        let view = UIVisualEffectView(frame: .zero)
+        
+        if blur {
+            let blurEffect = UIBlurEffect(style: .regular)
+            view.effect = blurEffect
+        }
+        
+        return view
     }
     
     func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Background>) {
         uiView.backgroundColor = color
         
-        if blur {
-            let blurEffect = UIBlurEffect(style: .regular)
-            uiView.effect = blurEffect
-        }
     }
 }
 

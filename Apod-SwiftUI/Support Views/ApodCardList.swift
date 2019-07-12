@@ -37,7 +37,7 @@ struct ApodCardList : View {
 #if DEBUG
 struct ApodCardList_Previews : PreviewProvider {
     static var previews: some View {
-        ApodCardList(apods: UserData.default.localApods )
+        ApodCardList(apods: UserData.test.localApods )
     }
 }
 #endif

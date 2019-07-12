@@ -16,13 +16,12 @@ struct Placeholder : View {
         VStack {
             Image(systemName: systemName)
                 .imageScale(.large)
-                .padding()
             
             Text(showTitle)
                 .frame(maxWidth: UIScreen.main.bounds.width)
                 .lineLimit(nil)
                 .multilineTextAlignment(.center)
-                .padding()
+                .padding([.leading, .trailing])
         }
     }
 }
