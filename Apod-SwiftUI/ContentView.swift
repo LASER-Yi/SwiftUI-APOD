@@ -40,8 +40,15 @@ struct ContentView : View {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(UserData())
+        Group {
+            ContentView()
+                .environmentObject(UserData())
+            
+            ContentView()
+                .environmentObject(UserData())
+                .colorScheme(.dark)
+        }
+        
     }
 }
 #endif

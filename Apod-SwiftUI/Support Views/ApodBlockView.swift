@@ -31,12 +31,13 @@ struct ApodBlockView : View {
     }
     
     var body: some View {
-        ZStack(alignment: .leading) {
+        ZStack(alignment: .bottomLeading) {
+            
             if apod.mediaType == .Image {
                 AsyncImage(url: apod.url!, image: $loadedImage)
                     .frame(width: frameWidth, height: frameHeight)
                     .clipped()
-                    .background(Color.init(white: 0.3))
+                    .background(Background(color: .systemGray5))
             }else {
                 Text("Video Content")
                     .color(.primary)
@@ -44,25 +45,29 @@ struct ApodBlockView : View {
                     .background(Color.secondary)
             }
             
-            VStack {
-                VStack(spacing: 4) {
-                    Text(apod.getFormatterDate())
-                        .font(.headline)
-                        .color(.init(white: 0.8))
+            VStack(alignment: .leading , spacing: 0) {
+                Text(apod.getFormatterDate())
+                    .font(.headline)
+                    .color(.secondary)
+                
+                HStack {
+                    Text(apod.title)
+                        .font(.title)
+                        .color(Color.white)
+                        .bold()
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
                     
-                        Text(apod.title)
-                            .font(.title)
-                            .color(Color.white)
-                            .bold()
-                            .lineLimit(nil)
-                            .multilineTextAlignment(.leading)
-                    
-                        }
-                        .relativeWidth(1)
-                        .padding(.leading, 12)
-                        .padding(.trailing, 12)
+                    Spacer()
                 }
-                .frame(width: frameWidth)
+                
+            }
+            .padding([.leading, .trailing], 12)
+            .padding([.top, .bottom], 6)
+            .background(Background(color: .init(white: 0.4, alpha: 0.2), blur: true))
+            .frame(width: frameWidth)
+            
+            
         }
         .presentation(isPresent ? modal : nil)
         .tapAction {
@@ -82,7 +87,9 @@ struct ApodBlockView_Previews : PreviewProvider {
         ScrollView {
             VStack(spacing: 32){
                 ApodBlockView(apod: testArray[0])
+                
                 ApodBlockView(apod: testArray[1])
+                    .colorScheme(.dark)
             }
             
         }
