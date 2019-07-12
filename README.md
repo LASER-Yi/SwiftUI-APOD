@@ -16,3 +16,8 @@ Please build with Xcode 11 and macOS 10.15 Catalina
 
 * Please reference [nasa/apod-api](https://github.com/nasa/apod-api) for api-usage
 * Put your API Key into *Models/UserData.swift*
+
+## Bug
+
+* Saved is unavaliable
+* URLSession Publisher handle
