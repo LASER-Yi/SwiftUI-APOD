@@ -82,7 +82,6 @@
 			children = (
 				ECC7DF1C22D4D78A00D583A1 /* Models */,
 				ECC7DF1922D4D6CB00D583A1 /* Views */,
-				ECC7DF2522D4E51900D583A1 /* Support Views */,
 				ECC7DF0222D4D62B00D583A1 /* AppDelegate.swift */,
 				ECC7DF0422D4D62B00D583A1 /* SceneDelegate.swift */,
 				ECC7DF0622D4D62B00D583A1 /* ContentView.swift */,
@@ -108,6 +107,7 @@
 				ECC8282122D637A2001F38A3 /* ApodModalView.swift */,
 				ECC8282322D71775001F38A3 /* WaterfallView.swift */,
 				ECC8282522D71A50001F38A3 /* SettingView.swift */,
+				ECC7DF2522D4E51900D583A1 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -122,7 +122,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		ECC7DF2522D4E51900D583A1 /* Support Views */ = {
+		ECC7DF2522D4E51900D583A1 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				EC77D1E522D5EF870095D3D4 /* AsyncImage.swift */,
@@ -132,7 +132,7 @@
 				ECC8282B22D83BBF001F38A3 /* ApodCardList.swift */,
 				EC4E1EEC22D88E7700B95491 /* Background.swift */,
 			);
-			path = "Support Views";
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

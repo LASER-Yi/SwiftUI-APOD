@@ -14,12 +14,14 @@ struct AsyncImage: View {
     
     @Binding var image: UIImage?
     
-    @State private var loadTask: AnyCancellable? = nil
+    @State var loadTask: AnyCancellable? = nil
+    
+    @State var imageName: String? = "arrow.down.square.fill"
     
     var body: some View {
         VStack {
             if image == nil {
-                EmptyView()
+                Placeholder(systemName: $imageName, showTitle: .constant(nil))
             }else {
                 Image(uiImage: image!)
                     .renderingMode(.original)
@@ -46,10 +48,16 @@ struct AsyncImage: View {
         let session = URLSession(configuration: .default)
         
         loadTask = session.dataTaskPublisher(for: url)
-            .map { (data, response) -> UIImage? in
-                return UIImage(data: data)
+            .tryMap({ (data, response) -> UIImage in
+                if let image = UIImage(data: data) {
+                    return image
+                }else {
+                    throw URLError(.unknown)
+                }
+            })
+            .catch{ error in
+                return Just(nil)
             }
-            .replaceError(with: nil)
             .assign(to: \.image, on: self)
     }
 }

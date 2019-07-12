@@ -29,7 +29,7 @@ final class UserData: BindableObject {
     }
 #endif
     
-    var apiKey: String = "DEMO_KEY" {
+    var apiKey: String = "Xb1080KHQwOEaBYyrUDN6e4YAmqVx0ng71NAVt8k" {
         didSet {
             didChange.send(self)
         }
@@ -136,8 +136,8 @@ extension UserData: Subscriber {
             requester = nil
         case .failure(.UrlError(let error)):
             requester?.handleRequestError("Network Error, Code: \(error.code)")
-        default:
-            break
+        case .failure(.other(let errorStr)):
+            requester?.handleRequestError(errorStr)
         }
         
         self.isLoading = false

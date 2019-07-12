@@ -32,8 +32,7 @@ struct ApodRequest {
     
     enum RequestError: Error {
         case UrlError(_ error: URLError)
-        case overrateLimit
-        case other
+        case other(_ str: String)
     }
     
     static private let requestUrl: URL = URL(string: "https://api.nasa.gov/planetary/apod")!
@@ -107,8 +106,10 @@ struct ApodRequest {
                     results.append(contentsOf: array)
                 }else if let single = try? decoder.decode(ApodResult.self, from: data) {
                     results.append(single)
-                }else {
-                    throw RequestError.other
+                }else if let error = try? decoder.decode(ApodResult.Error.self, from: data){
+                    throw RequestError.other(error.msg)
+                }else if let error = try? decoder.decode(ApodResult.LimitError.self, from: data) {
+                    throw RequestError.other(error.error.message)
                 }
                 
                 return results

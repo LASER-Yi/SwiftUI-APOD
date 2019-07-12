@@ -11,18 +11,18 @@ import SwiftUI
 struct WaterfallView : View, ApodRequester {
     
     func handleRequestError(_ msg: String) {
-        loadMsg = ("icloud.slash", msg)
+        loadMsg = ("cloud.bolt", msg)
     }
     
     func reloadApod() {
         if !userData.isLoading {
-            loadMsg = ("icloud", "Loading")
+            loadMsg = ("cloud.rain", "Loading")
             
             self.userData.requestApod(self)
         }
     }
     
-    @State var loadMsg: (String, String) = ("icloud" ,"Loading")
+    @State var loadMsg: (String?, String?) = ("cloud.rain" ,"Loading")
     
     @EnvironmentObject var userData: UserData
     
@@ -60,8 +60,8 @@ struct WaterfallView : View, ApodRequester {
                     .opacity(userData.isLoading ? 0.5 : 1)
             }else {
                 Placeholder(
-                    systemName: userData.loadType != .saved ? loadMsg.0 : "heart.slash",
-                    showTitle: userData.loadType != .saved ? loadMsg.1 : "Empty")
+                    systemName: $loadMsg.0,
+                    showTitle: $loadMsg.1)
                     .padding(.top, 200)
             }
             
