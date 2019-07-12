@@ -21,11 +21,9 @@ struct ApodBlockView : View {
     var modal: Modal {
         let view = ApodModalView(apod: apod, loadedImage: $loadedImage)
         
-        
         let modalView = Modal(view) {
             self.isPresent = false
         }
-        
         
         return modalView
     }
@@ -80,6 +78,8 @@ struct ApodBlockView : View {
         .shadow(radius: 6)
     }
 }
+
+
 
 #if DEBUG
 struct ApodBlockView_Previews : PreviewProvider {

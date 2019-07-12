@@ -54,7 +54,7 @@ struct WaterfallView : View, ApodRequester {
             .padding(.trailing, 48)
             
             if !self.selectedApods().isEmpty {
-                ApodCardList(apods: self.selectedApods())
+                ApodBlockList(apods: self.selectedApods())
                     .padding(.top, 24)
                     .padding(.bottom, 24)
                     .opacity(userData.isLoading ? 0.5 : 1)
@@ -85,6 +85,8 @@ struct ApodHeader: View {
     
     @EnvironmentObject var userData: UserData
     
+    @State var btnAngle = 180.0
+    
     var body: some View {
         
         VStack(alignment: .leading, spacing: 0) {
@@ -105,17 +107,24 @@ struct ApodHeader: View {
                 }) {
                     Image(systemName: "arrow.2.circlepath.circle")
                         .imageScale(.large)
-                        .rotationEffect(Angle(degrees: userData.isLoading ? 90 : 0))
-                        .animation(.fluidSpring())
+                        .rotationEffect(Angle(degrees: userData.isLoading ? btnAngle : 0))
+                        .animation(.basic())
                         .disabled(userData.isLoading == true)
+                        .onAppear {
+                            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+                                if self.userData.isLoading {
+                                    self.btnAngle += 12.0
+                                }else {
+                                    self.btnAngle = 180.0
+                                }
+                            }
+                    }
                 }
             }
             
             Divider()
         }
-        .padding(.leading, 12)
-            .padding(.trailing, 24)
-            .padding(.top, 32)
+        .padding()
         
     }
 }

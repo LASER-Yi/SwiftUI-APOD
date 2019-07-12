@@ -29,7 +29,7 @@ final class UserData: BindableObject {
     }
 #endif
     
-    var apiKey: String = "Xb1080KHQwOEaBYyrUDN6e4YAmqVx0ng71NAVt8k" {
+    var apiKey: String = "DEMO_KEY" {
         didSet {
             didChange.send(self)
         }
