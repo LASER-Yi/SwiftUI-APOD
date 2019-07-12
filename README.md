@@ -2,6 +2,8 @@
 
 An example Astronomy Picture of the Day(APOD) application using SwiftUI and Combine under iOS 13
 
+![iPhone 8](./images/Group.png)
+
 ## Requirement
 
 * Xcode 11
