@@ -37,10 +37,10 @@ struct ApodBlockView : View {
                     .clipped()
                     .background(Background(color: .systemGray5))
             }else {
-                Text("Video Content")
-                    .color(.primary)
+                Image(systemName: "video")
+                    .imageScale(.large)
                     .frame(width: frameWidth, height: frameHeight)
-                    .background(Color.secondary)
+                    .background(Background(color: .systemGray5))
             }
             
             VStack(alignment: .leading , spacing: 0) {
