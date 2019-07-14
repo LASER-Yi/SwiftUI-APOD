@@ -8,11 +8,9 @@
 
 import SwiftUI
 
-struct ApodModalView : View {
+struct ModalView : View {
     
-    let apod: ApodResult
-    
-    @State var favourite: Bool = false
+    @Binding var apod: ApodResult
     
     @Binding var loadedImage: UIImage?
     
@@ -21,8 +19,9 @@ struct ApodModalView : View {
         VStack(spacing: 0) {
             if apod.hdurl != nil {
                 AsyncImage(url: apod.hdurl!, image: $loadedImage)
-                    .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 400.0)
+                    .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 400.0, maxHeight: 450.0)
                     .clipped()
+                    .scaledToFit()
                     .edgesIgnoringSafeArea(.top)
                     .edgesIgnoringSafeArea(.leading)
                     .edgesIgnoringSafeArea(.trailing)
@@ -49,11 +48,11 @@ struct ApodModalView : View {
                         Spacer()
                         
                         Button(action: {
-                            self.favourite.toggle()
+                            self.apod.favourite.toggle()
                         }) {
-                            Image(systemName: self.favourite ? "plus.circle.fill" : "plus.circle")
-                                .imageScale(.medium)
-                                .foregroundColor(self.favourite ? .yellow : .gray)
+                            Image(systemName: self.apod.favourite ? "star.fill" : "star")
+                                .imageScale(.small)
+                                .foregroundColor(self.apod.favourite ? .yellow : .gray)
                         }
                     }
                     
@@ -76,7 +75,7 @@ struct ApodModalView : View {
 #if DEBUG
 struct ApodModal_Previews : PreviewProvider {
     static var previews: some View {
-        ApodModalView(apod: UserData.test.localApods.first!, loadedImage: .constant(nil))
+        ModalView(apod: .constant(UserData.test.localApods.first!) , loadedImage: .constant(nil))
     }
 }
 #endif

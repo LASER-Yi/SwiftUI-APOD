@@ -8,18 +8,15 @@
 
 import SwiftUI
 
-struct ApodBlockList : View {
+struct WfCardList : View {
     
-    let apods: [ApodResult]
+    @Binding var apods: [ApodResult]
     
     var body: some View {
-        VStack(spacing: 32) {
-            ForEach(apods.identified(by: \.self)) { apod in
-                ApodBlockView(apod: apod)
-                    .transition(.opacity)
-            }
+        ForEach($apods) { apod in
+            WfApodCard(apod: apod)
         }
-        .frame(width: UIScreen.main.bounds.width)
+        .frame(width: UIScreen.main.bounds.width - 24)
     }
 }
 
@@ -46,7 +43,7 @@ extension AnyTransition {
 #if DEBUG
 struct ApodCardList_Previews : PreviewProvider {
     static var previews: some View {
-        ApodBlockList(apods: UserData.test.localApods )
+        WfCardList(apods: .constant(UserData.test.localApods) )
     }
 }
 #endif

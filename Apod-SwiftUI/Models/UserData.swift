@@ -29,7 +29,7 @@ final class UserData: BindableObject {
     }
 #endif
     
-    var apiKey: String = "DEMO_KEY" {
+    var apiKey: String = "Xb1080KHQwOEaBYyrUDN6e4YAmqVx0ng71NAVt8k" {
         didSet {
             didChange.send(self)
         }
@@ -45,6 +45,7 @@ final class UserData: BindableObject {
         didSet {
             DispatchQueue.main.async {
                 self.didChange.send(self)
+                self.updateSaved()
             }
         }
     }
@@ -53,8 +54,25 @@ final class UserData: BindableObject {
         didSet {
             DispatchQueue.main.async {
                 self.didChange.send(self)
+                self.updateSaved()
             }
         }
+    }
+    
+    var savedApods: [ApodResult] = [] {
+        didSet {
+            DispatchQueue.main.async {
+                self.didChange.send(self)
+            }
+        }
+    }
+    
+    func updateSaved() {
+        let allLoaded = localApods + randomApods
+        
+        let allStar = allLoaded.filter { $0.favourite && savedApods.contains($0)}
+        
+        savedApods += allStar
     }
     
     enum ApodLoadType: String, CaseIterable {
@@ -84,9 +102,14 @@ final class UserData: BindableObject {
     func requestApod(_ requester: ApodRequester? = nil) {
         self.isLoading = true
         self.requester = requester
+        updateSaved()
         
         if self.loadType == .saved {
-            
+            // tempory
+            self.isLoading = false
+            if savedApods.isEmpty {
+                requester?.handleRequestError("Empty")
+            }
         }else {
             var requestObj = ApodRequest(api_key: apiKey)
             

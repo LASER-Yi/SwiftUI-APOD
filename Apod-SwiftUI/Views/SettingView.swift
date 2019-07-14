@@ -19,11 +19,11 @@ struct SettingView : View {
                     VStack(alignment: .leading) {
                         Text("API Key")
                             .bold()
-                        TextField("DEMO_KEY", text: $userData.apiKey)
+                            TextField("DEMO_KEY", text: $userData.apiKey)
                     }
                     
                     Toggle(isOn: $userData.loadHdImage) {
-                        Text("Load HD Image")
+                        Text("Auto Load HD Image")
                     }
                 }
             }

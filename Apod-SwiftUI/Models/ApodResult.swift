@@ -7,8 +7,12 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct ApodResult: Hashable, Codable {
+struct ApodResult: Hashable, Codable,  Identifiable {
+    var id: UUID = UUID()
+    
+    
     var copyright: String?
     var date: Date
     var url: URL?
@@ -18,6 +22,8 @@ struct ApodResult: Hashable, Codable {
     var version: String
     var title: String
     var thumbnailUrl: URL?
+    
+    var favourite: Bool = false
     
     struct Error: Codable {
         var code: Int

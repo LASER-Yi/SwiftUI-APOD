@@ -8,18 +8,23 @@
 
 import SwiftUI
 
-struct ApodBlockView : View {
-    let apod: ApodResult
+struct WfApodCard : View {
+    @Binding var apod: ApodResult
     
-    let frameWidth: CGFloat = 340.0
-    let frameHeight: CGFloat = 380.0
+    let aspect: Length = 0.95
+    
+    let height: Length = 350
+    
+    var width: Length {
+        height * aspect
+    }
     
     @State var isPresent: Bool = false
     
     @State var loadedImage: UIImage? = nil
     
     var modal: Modal {
-        let view = ApodModalView(apod: apod, loadedImage: $loadedImage)
+        let view = ModalView(apod: $apod, loadedImage: $loadedImage)
         
         let modalView = Modal(view) {
             self.isPresent = false
@@ -31,22 +36,28 @@ struct ApodBlockView : View {
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             
-            if apod.mediaType == .Image {
-                AsyncImage(url: apod.url!, image: $loadedImage)
-                    .frame(width: frameWidth, height: frameHeight)
-                    .clipped()
-                    .background(Background(color: .systemGray5))
-            }else {
-                Image(systemName: "video")
-                    .imageScale(.large)
-                    .frame(width: frameWidth, height: frameHeight)
-                    .background(Background(color: .systemGray5))
+            VStack {
+                if apod.mediaType == .Image {
+                    AsyncImage(url: apod.url!, image: $loadedImage)
+                        .scaledToFill()
+                        .animation(nil)
+                    
+                }else {
+                    Image(systemName: "video")
+                        .imageScale(.large)
+                }
             }
+            .frame(width: width, height: height)
+            .background(Background(color: .systemGray5))
+            
+            
             
             VStack(alignment: .leading , spacing: 0) {
+                
                 Text(apod.getFormatterDate())
                     .font(.headline)
                     .color(.secondary)
+                
                 
                 HStack {
                     Text(apod.title)
@@ -63,7 +74,6 @@ struct ApodBlockView : View {
             .padding([.leading, .trailing], 12)
             .padding([.top, .bottom], 6)
             .background(Background(color: .init(white: 0.4, alpha: 0.2), blur: true))
-            .frame(width: frameWidth)
             
             
         }
@@ -73,9 +83,11 @@ struct ApodBlockView : View {
         }
         //.scaleEffect(isPresent ? 0.98 : 1.0)
         //.animation(.fluidSpring())
-        .cornerRadius(8)
         .clipped()
+        .frame(width: width)
+        .cornerRadius(8)
         .shadow(radius: 6)
+
     }
 }
 
@@ -86,14 +98,14 @@ struct ApodBlockView_Previews : PreviewProvider {
     static var previews: some View {
         ScrollView {
             VStack(spacing: 32){
-                ApodBlockView(apod: testArray[0])
+                WfApodCard(apod: .constant(testArray[0]) )
                 
-                ApodBlockView(apod: testArray[1])
+                WfApodCard(apod: .constant(testArray[1]) )
                     .colorScheme(.dark)
             }
+            .frame(width: UIScreen.main.bounds.width)
             
         }
-        
     }
 }
 #endif

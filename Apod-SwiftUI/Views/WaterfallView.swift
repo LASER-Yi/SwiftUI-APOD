@@ -26,22 +26,24 @@ struct WaterfallView : View, ApodRequester {
     
     @EnvironmentObject var userData: UserData
     
-    func selectedApods() -> [ApodResult] {
+    var selected: Binding<[ApodResult]> {
         switch userData.loadType {
         case .recent:
-            return userData.localApods
+            return $userData.localApods
         case .random:
-            return userData.randomApods
-        default:
-            return []
+            return $userData.randomApods
+        case .saved:
+            return $userData.savedApods
         }
     }
     
     var body: some View {
         ScrollView {
-            ApodHeader(requester: self)
+            WfHeader(reloadFunc: reloadApod)
                 .environmentObject(userData)
-                .padding(.bottom, 12)
+                .padding(.bottom, 8)
+                .animation(nil)
+                .zIndex(100)
             
             SegmentedControl(selection: $userData.loadType) {
                 ForEach(UserData.ApodLoadType.allCases.identified(by: \.self)) {
@@ -50,14 +52,17 @@ struct WaterfallView : View, ApodRequester {
                     Text(type.rawValue).tag(type)
                 }
             }
-            .padding(.leading, 48)
-            .padding(.trailing, 48)
+            .relativeWidth(0.75)
+            .animation(nil)
+            .zIndex(100)
             
-            if !self.selectedApods().isEmpty {
-                ApodBlockList(apods: self.selectedApods())
+            if !self.selected.isEmpty {
+                WfCardList(apods: selected)
                     .padding(.top, 24)
                     .padding(.bottom, 24)
-                    .opacity(userData.isLoading ? 0.5 : 1)
+                    .opacity(userData.isLoading ? 0.6 : 1)
+                    .animation(.basic())  
+                    
             }else {
                 Placeholder(
                     systemName: $loadMsg.0,
@@ -73,61 +78,7 @@ struct WaterfallView : View, ApodRequester {
     }
 }
 
-struct ApodHeader: View {
-    
-    var currentDateStr: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM, dd"
-        return formatter.string(from: .init())
-    }
-    
-    var requester: WaterfallView
-    
-    @EnvironmentObject var userData: UserData
-    
-    @State var btnAngle = 180.0
-    
-    var body: some View {
-        
-        VStack(alignment: .leading, spacing: 0) {
-            Text(currentDateStr.uppercased())
-                .font(.subheadline)
-                .bold()
-                .color(.gray)
-            
-            HStack {
-                Text("APOD")
-                    .font(.largeTitle)
-                    .bold()
-                
-                Spacer()
-                
-                Button(action: {
-                    self.requester.reloadApod()
-                }) {
-                    Image(systemName: "arrow.2.circlepath.circle")
-                        .imageScale(.large)
-                        .rotationEffect(Angle(degrees: userData.isLoading ? btnAngle : 0))
-                        .animation(.basic())
-                        .disabled(userData.isLoading == true)
-                        .onAppear {
-                            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                                if self.userData.isLoading {
-                                    self.btnAngle += 12.0
-                                }else {
-                                    self.btnAngle = 180.0
-                                }
-                            }
-                    }
-                }
-            }
-            
-            Divider()
-        }
-        .padding()
-        
-    }
-}
+
 
 #if DEBUG
 struct WaterfallView_Previews : PreviewProvider {
