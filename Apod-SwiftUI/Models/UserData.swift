@@ -15,7 +15,7 @@ protocol ApodRequester {
 
 final class UserData: BindableObject {
     
-    let didChange = PassthroughSubject<UserData, Never>()
+    let willChange = PassthroughSubject<UserData, Never>()
     
     static let shared = UserData()
 #if DEBUG
@@ -30,39 +30,37 @@ final class UserData: BindableObject {
 #endif
     
     var apiKey: String = "DEMO_KEY" {
-        didSet {
-            didChange.send(self)
+        willSet {
+            willChange.send(self)
         }
     }
     
     var loadHdImage: Bool = true {
-        didSet {
-            didChange.send(self)
+        willSet {
+            willChange.send(self)
         }
     }
     
     var localApods: [ApodResult] = [] {
-        didSet {
+        willSet {
             DispatchQueue.main.async {
-                self.didChange.send(self)
-                self.updateSaved()
+                self.willChange.send(self)
             }
         }
     }
     
     var randomApods: [ApodResult] = [] {
-        didSet {
+        willSet {
             DispatchQueue.main.async {
-                self.didChange.send(self)
-                self.updateSaved()
+                self.willChange.send(self)
             }
         }
     }
     
     var savedApods: [ApodResult] = [] {
-        didSet {
+        willSet {
             DispatchQueue.main.async {
-                self.didChange.send(self)
+                self.willChange.send(self)
             }
         }
     }
@@ -82,15 +80,15 @@ final class UserData: BindableObject {
     }
     
     var loadType: ApodLoadType = .recent {
-        didSet {
+        willSet {
             self.requestApod()
         }
     }
     
     var isLoading: Bool = false {
-        didSet {
+        willSet {
             DispatchQueue.main.async {
-                self.didChange.send(self)
+                self.willChange.send(self)
             }
         }
     }
@@ -155,12 +153,12 @@ extension UserData: Subscriber {
     func receive(completion: Subscribers.Completion<Failure>) {
         
         switch completion {
-        case .finished:
-            requester = nil
-        case .failure(.UrlError(let error)):
-            requester?.handleRequestError("Network Error, Code: \(error.code)")
-        case .failure(.other(let errorStr)):
-            requester?.handleRequestError(errorStr)
+            case .finished:
+                requester = nil
+            case .failure(.UrlError(let error)):
+                requester?.handleRequestError("Network Error, Code: \(error.code)")
+            case .failure(.other(let errorStr)):
+                requester?.handleRequestError(errorStr)
         }
         
         self.isLoading = false

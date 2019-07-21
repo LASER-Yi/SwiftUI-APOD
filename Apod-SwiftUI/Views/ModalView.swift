@@ -19,12 +19,10 @@ struct ModalView : View {
         VStack(spacing: 0) {
             if apod.hdurl != nil {
                 AsyncImage(url: apod.hdurl!, image: $loadedImage)
-                    .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 400.0, maxHeight: 450.0)
+                    .frame(idealWidth: UIScreen.main.bounds.width, minHeight: 400.0, maxHeight: 450.0)
                     .clipped()
-                    .scaledToFit()
+                    .scaledToFill()
                     .edgesIgnoringSafeArea(.top)
-                    .edgesIgnoringSafeArea(.leading)
-                    .edgesIgnoringSafeArea(.trailing)
                     .background(Color.white)
             }else {
                 WebView(request: .init(url: apod.url!))
@@ -43,7 +41,7 @@ struct ModalView : View {
                     HStack {
                         Text(apod.getFormatterDate())
                             .font(.headline)
-                            .color(.gray)
+                            .foregroundColor(.gray)
                         
                         Spacer()
                         

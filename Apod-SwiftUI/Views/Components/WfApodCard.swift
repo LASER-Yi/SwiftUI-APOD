@@ -23,14 +23,10 @@ struct WfApodCard : View {
     
     @State var loadedImage: UIImage? = nil
     
-    var modal: Modal {
+    var modal: some View {
         let view = ModalView(apod: $apod, loadedImage: $loadedImage)
         
-        let modalView = Modal(view) {
-            self.isPresent = false
-        }
-        
-        return modalView
+        return view
     }
     
     var body: some View {
@@ -56,13 +52,13 @@ struct WfApodCard : View {
                 
                 Text(apod.getFormatterDate())
                     .font(.headline)
-                    .color(.secondary)
+                    .foregroundColor(.secondary)
                 
                 
                 HStack {
                     Text(apod.title)
                         .font(.title)
-                        .color(Color.white)
+                        .foregroundColor(.white)
                         .bold()
                         .lineLimit(nil)
                         .multilineTextAlignment(.leading)
@@ -77,12 +73,14 @@ struct WfApodCard : View {
             
             
         }
-        .presentation(isPresent ? modal : nil)
+        .sheet(isPresented: $isPresent, onDismiss: {
+            self.isPresent = false
+        }, content: {
+            self.modal
+        })
         .tapAction {
                 self.isPresent = true
         }
-        //.scaleEffect(isPresent ? 0.98 : 1.0)
-        //.animation(.fluidSpring())
         .clipped()
         .frame(width: width)
         .cornerRadius(8)
@@ -96,16 +94,14 @@ struct WfApodCard : View {
 #if DEBUG
 struct ApodBlockView_Previews : PreviewProvider {
     static var previews: some View {
-        ScrollView {
-            VStack(spacing: 32){
+        Group{
                 WfApodCard(apod: .constant(testArray[0]) )
-                
+
                 WfApodCard(apod: .constant(testArray[1]) )
                     .colorScheme(.dark)
-            }
-            .frame(width: UIScreen.main.bounds.width)
-            
         }
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }
 #endif

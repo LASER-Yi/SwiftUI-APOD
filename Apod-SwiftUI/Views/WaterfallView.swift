@@ -46,9 +46,8 @@ struct WaterfallView : View, ApodRequester {
                 .zIndex(100)
             
             SegmentedControl(selection: $userData.loadType) {
-                ForEach(UserData.ApodLoadType.allCases.identified(by: \.self)) {
-                    type in
-                    
+                
+                ForEach(UserData.ApodLoadType.allCases, id: \.self) { type in
                     Text(type.rawValue).tag(type)
                 }
             }
@@ -61,7 +60,7 @@ struct WaterfallView : View, ApodRequester {
                     .padding(.top, 24)
                     .padding(.bottom, 24)
                     .opacity(userData.isLoading ? 0.6 : 1)
-                    .animation(.basic())  
+                    .animation(.easeInOut)
                     
             }else {
                 Placeholder(

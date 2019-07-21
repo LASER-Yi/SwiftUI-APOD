@@ -23,7 +23,7 @@ struct Placeholder : View {
             
             if showTitle != nil {
                 Text(showTitle!)
-                    .color(.secondary)
+                    .foregroundColor(.secondary)
                     .frame(maxWidth: UIScreen.main.bounds.width)
                     .lineLimit(nil)
                     .multilineTextAlignment(.center)

@@ -28,7 +28,7 @@ struct WfHeader: View {
             Text(currentDateStr.uppercased())
                 .font(.subheadline)
                 .bold()
-                .color(.gray)
+                .foregroundColor(.gray)
             
             HStack {
                 Text("APOD")
@@ -43,7 +43,7 @@ struct WfHeader: View {
                     Image(systemName: "arrow.2.circlepath.circle")
                         .imageScale(.large)
                         .rotationEffect(Angle(degrees: userData.isLoading ? btnAngle : 0))
-                        .animation(.basic())
+                        .animation(.easeInOut)
                         .disabled(userData.isLoading == true)
                         .onAppear {
                             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
@@ -71,6 +71,7 @@ struct Header_Previews : PreviewProvider {
     static var previews: some View {
         WfHeader(reloadFunc: {})
             .environmentObject(UserData.test)
+            .previewLayout(.sizeThatFits)
     }
 }
 #endif
