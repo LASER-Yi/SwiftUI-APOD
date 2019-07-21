@@ -14,20 +14,45 @@ struct SettingView : View {
     
     var body: some View {
         NavigationView {
-            Form {
+            List {
                 Section {
-                    VStack(alignment: .leading) {
-                        Text("API Key")
-                            .bold()
-                            TextField("DEMO_KEY", text: $userData.apiKey)
+                    NavigationLink(destination: TextEditor(original: $userData.apiKey)) {
+                        HStack {
+                            Image(systemName: "antenna.radiowaves.left.and.right")
+                            Text("API Key")
+                            
+                            Spacer()
+                            
+                            Text(userData.apiKey)
+                                .foregroundColor(.secondary)
+                        }
                     }
                     
+                    
+                    
                     Toggle(isOn: $userData.loadHdImage) {
-                        Text("Auto Load HD Image")
+                        HStack {
+                            Image(systemName: "map")
+                            Text("HD Image")
+                        }
                     }
                 }
+                
+                Section {
+                    HStack {
+                        Image(systemName: "heart")
+                        Text("Github")
+                        
+                        Spacer()
+                        
+                        Text("APOD-SwiftUI")
+                            .foregroundColor(.secondary)
+                    }
+                    
+                }
             }
-            .navigationBarTitle(Text("Settings"))
+            .listStyle(.grouped)
+            .navigationBarTitle(Text("Settings"), displayMode: .inline)
         }
     }
 }
@@ -36,7 +61,7 @@ struct SettingView : View {
 struct SettingView_Previews : PreviewProvider {
     static var previews: some View {
         SettingView()
-            .environmentObject(UserData())
+            .environmentObject(UserData.test)
     }
 }
 #endif

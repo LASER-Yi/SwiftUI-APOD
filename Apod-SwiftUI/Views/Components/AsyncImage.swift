@@ -16,12 +16,12 @@ struct AsyncImage: View {
     
     @State var loadTask: AnyCancellable? = nil
     
-    @State var imageName: String? = "arrow.down.square.fill"
+    @State var imageName: String = "arrow.down.square.fill"
     
     var body: some View {
         VStack {
             if image == nil {
-                Placeholder(systemName: $imageName, showTitle: .constant(nil))
+                Placeholder(systemName: imageName, showTitle: nil)
             }else {
                 Image(uiImage: image!)
                     .renderingMode(.original)

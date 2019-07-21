@@ -49,11 +49,10 @@ struct WfHeader: View {
                             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
                                 if self.userData.isLoading {
                                     self.btnAngle += 12.0
+                                    self.btnAngle.formTruncatingRemainder(dividingBy: 360.0)
                                 }else {
                                     self.btnAngle = 180.0
                                 }
-                                
-                                self.btnAngle.formTruncatingRemainder(dividingBy: 360.0)
                             }
                         }
                 }

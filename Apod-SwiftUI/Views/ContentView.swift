@@ -12,8 +12,26 @@ struct ContentView : View {
     
     @EnvironmentObject var userData: UserData
     
+    @State var isAlertPresented = false
+    
+    @State var alert: Alert? = nil
+    
+    func makeAlert(title: String, msg: String) {
+        alert = Alert(title: Text(title), message: Text(msg))
+        isAlertPresented = true
+    }
+    
     var body: some View {
         TabbedView {
+//            Text("Today")
+//                .tabItem {
+//                    VStack{
+//                        Image(systemName: "skew")
+//                        Text("Today")
+//                    }
+//                }
+//                .tag(0)
+            
             WaterfallView()
                 .environmentObject(userData)
                 .tabItem {
@@ -22,7 +40,7 @@ struct ContentView : View {
                         Text("APOD")
                     }
                 }
-                .tag("waterfall")
+                .tag(1)
             
             SettingView()
                 .environmentObject(userData)
@@ -32,7 +50,24 @@ struct ContentView : View {
                         Text("Setting")
                     }
                 }
-                .tag("setting")
+                .tag(2)
+        }
+        .alert(isPresented: $isAlertPresented) { alert! }
+        .onAppear{
+            self.userData.delegate = self
+        }
+    }
+}
+
+extension ContentView: RequestDelegate {
+    func requestError(_ error: ApodRequest.RequestError) {
+        switch error {
+        case .Other(let msg):
+            makeAlert(title: "Error", msg: msg)
+        case .UrlError(let error):
+            makeAlert(title: "Network Error", msg: error.localizedDescription)
+        default:
+            break
         }
     }
 }

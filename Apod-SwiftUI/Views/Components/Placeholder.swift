@@ -10,16 +10,15 @@ import SwiftUI
 
 struct Placeholder : View {
     
-    @Binding var systemName: String?
-    @Binding var showTitle: String?
+    var systemName: String
+    var showTitle: String?
     
     var body: some View {
         VStack {
-            if systemName != nil {
-                Image(systemName: systemName!)
-                    .colorMultiply(.secondary)
-                    .imageScale(.large)
-            }
+            Image(systemName: systemName)
+                .colorMultiply(.secondary)
+                .imageScale(.large)
+                .padding(.bottom, 4)
             
             if showTitle != nil {
                 Text(showTitle!)
@@ -37,7 +36,7 @@ struct Placeholder : View {
 #if DEBUG
 struct Placeholder_Previews : PreviewProvider {
     static var previews: some View {
-        Placeholder(systemName: .constant("cloud.bolt") , showTitle: .constant("You have exceeded your rate limit. Try again later or contact us at https://api.nasa.gov:443/contact/ for assistance"))
+        Placeholder(systemName: "cloud.bolt" , showTitle: "You have exceeded your rate limit. Try again later or contact us at https://api.nasa.gov:443/contact/ for assistance")
     }
 }
 #endif

@@ -8,21 +8,23 @@
 
 import SwiftUI
 
-struct WaterfallView : View, ApodRequester {
-    
-    func handleRequestError(_ msg: String) {
-        loadMsg = ("cloud.bolt", msg)
-    }
+struct WaterfallView : View {
     
     func reloadApod() {
         if !userData.isLoading {
-            loadMsg = ("cloud.rain", "Loading")
-            
-            self.userData.requestApod(self)
+            self.userData.requestApod()
         }
     }
     
-    @State var loadMsg: (String?, String?) = ("cloud.rain" ,"Loading")
+    var loadMsg: (String, String) {
+        if userData.isLoading {
+            return ("cloud.rain" ,"Loading")
+        }else if selected.isEmpty {
+            return ("tornado", "Empty")
+        }else {
+            return ("cloud.bolt", "Error")
+        }
+    }
     
     @EnvironmentObject var userData: UserData
     
@@ -51,7 +53,7 @@ struct WaterfallView : View, ApodRequester {
                     Text(type.rawValue).tag(type)
                 }
             }
-            .relativeWidth(0.75)
+            .frame(width: 275)
             .animation(nil)
             .zIndex(100)
             
@@ -64,14 +66,16 @@ struct WaterfallView : View, ApodRequester {
                     
             }else {
                 Placeholder(
-                    systemName: $loadMsg.0,
-                    showTitle: $loadMsg.1)
-                    .padding(.top, 200)
+                    systemName: loadMsg.0,
+                    showTitle: loadMsg.1)
+                    .padding(.top, 180)
             }
             
         }
         .onAppear {
-            self.reloadApod()
+            if self.selected.isEmpty {
+                self.reloadApod()                
+            }
         }
         
     }

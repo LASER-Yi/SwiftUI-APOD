@@ -26,6 +26,8 @@
 		ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282722D78BC8001F38A3 /* WebView.swift */; };
 		ECC8282A22D83AEF001F38A3 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282922D83AEF001F38A3 /* Placeholder.swift */; };
 		ECC8282C22D83BBF001F38A3 /* WfCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282B22D83BBF001F38A3 /* WfCardList.swift */; };
+		ECFEBD5622E4C018008E0613 /* UserDefaults+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFEBD5522E4C018008E0613 /* UserDefaults+Helper.swift */; };
+		ECFEBD5822E4D010008E0613 /* TextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFEBD5722E4D010008E0613 /* TextEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		ECC8282722D78BC8001F38A3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ECC8282922D83AEF001F38A3 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		ECC8282B22D83BBF001F38A3 /* WfCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfCardList.swift; sourceTree = "<group>"; };
+		ECFEBD5522E4C018008E0613 /* UserDefaults+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UserDefaults+Helper.swift"; path = "../../../../../../../System/Volumes/Data/Users/Liang/Local/Projects/Apod-SwiftUI/Apod-SwiftUI/Models/UserDefaults+Helper.swift"; sourceTree = "<group>"; };
+		ECFEBD5722E4D010008E0613 /* TextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextEditor.swift; path = "../../../../../../../../System/Volumes/Data/Users/Liang/Local/Projects/Apod-SwiftUI/Apod-SwiftUI/Views/Components/TextEditor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,7 @@
 				ECC7DF1D22D4D80C00D583A1 /* ApodResult.swift */,
 				EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */,
 				ECC7DF1F22D4D8A800D583A1 /* UserData.swift */,
+				ECFEBD5522E4C018008E0613 /* UserDefaults+Helper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 				ECC8282B22D83BBF001F38A3 /* WfCardList.swift */,
 				ECC8282922D83AEF001F38A3 /* Placeholder.swift */,
 				EC4E1EEC22D88E7700B95491 /* Background.swift */,
+				ECFEBD5722E4D010008E0613 /* TextEditor.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -209,12 +215,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECFEBD5622E4C018008E0613 /* UserDefaults+Helper.swift in Sources */,
 				EC166A9122DB51EB0003F74A /* WfHeader.swift in Sources */,
 				ECC7DF2022D4D8A800D583A1 /* UserData.swift in Sources */,
 				EC77D1E622D5EF870095D3D4 /* AsyncImage.swift in Sources */,
 				EC77D1E422D5E7F70095D3D4 /* ApodRequest.swift in Sources */,
 				ECC7DF1B22D4D6E200D583A1 /* WfApodCard.swift in Sources */,
 				ECC7DF0322D4D62B00D583A1 /* AppDelegate.swift in Sources */,
+				ECFEBD5822E4D010008E0613 /* TextEditor.swift in Sources */,
 				ECC8282222D637A2001F38A3 /* ModalView.swift in Sources */,
 				ECC7DF0522D4D62B00D583A1 /* SceneDelegate.swift in Sources */,
 				ECC7DF0722D4D62B00D583A1 /* ContentView.swift in Sources */,

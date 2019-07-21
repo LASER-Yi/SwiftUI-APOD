@@ -9,8 +9,8 @@
 import SwiftUI
 import Combine
 
-protocol ApodRequester {
-    func handleRequestError(_ msg: String)
+protocol RequestDelegate {
+    func requestError(_ error: ApodRequest.RequestError)
 }
 
 final class UserData: BindableObject {
@@ -18,6 +18,7 @@ final class UserData: BindableObject {
     let willChange = PassthroughSubject<UserData, Never>()
     
     static let shared = UserData()
+    
 #if DEBUG
     static var test: UserData {
         let data = UserData()
@@ -29,15 +30,33 @@ final class UserData: BindableObject {
     }
 #endif
     
-    var apiKey: String = "DEMO_KEY" {
-        willSet {
+    var apiKey: String {
+        set {
             willChange.send(self)
+            UserDefaults.saveCustomValue(for: .ApiKey, value: newValue)
+        }
+        get {
+            if let value = UserDefaults.getCustomValue(for: .ApiKey) as? String {
+                return value
+            }else {
+                UserDefaults.saveCustomValue(for: .ApiKey, value: "DEMO_KEY")
+                return "DEMO_KEY"
+            }
         }
     }
     
-    var loadHdImage: Bool = true {
-        willSet {
+    var loadHdImage: Bool {
+        set {
             willChange.send(self)
+            UserDefaults.saveCustomValue(for: .AutoHdImage, value: newValue)
+        }
+        get {
+            if let value = UserDefaults.getCustomValue(for: .AutoHdImage) as? Bool {
+                return value
+            }else {
+                UserDefaults.saveCustomValue(for: .AutoHdImage, value: true)
+                return true
+            }
         }
     }
     
@@ -80,7 +99,7 @@ final class UserData: BindableObject {
     }
     
     var loadType: ApodLoadType = .recent {
-        willSet {
+        didSet {
             self.requestApod()
         }
     }
@@ -95,18 +114,19 @@ final class UserData: BindableObject {
     
     var savedSubscription: Subscription? = nil
     
-    var requester: ApodRequester? = nil
+    var delegate: RequestDelegate? = nil
     
-    func requestApod(_ requester: ApodRequester? = nil) {
+    func requestApod() {
+        savedSubscription?.cancel()
+        
         self.isLoading = true
-        self.requester = requester
         updateSaved()
         
         if self.loadType == .saved {
             // tempory
             self.isLoading = false
             if savedApods.isEmpty {
-                requester?.handleRequestError("Empty")
+                delegate?.requestError(.Empty)
             }
         }else {
             var requestObj = ApodRequest(api_key: apiKey)
@@ -126,9 +146,7 @@ final class UserData: BindableObject {
 
 extension UserData: Subscriber {
     
-    func receive(subscription: Subscription) {
-        savedSubscription?.cancel()
-        
+    func receive(subscription: Subscription) {        
         subscription.request(.max(1))
         
         savedSubscription = subscription
@@ -153,12 +171,10 @@ extension UserData: Subscriber {
     func receive(completion: Subscribers.Completion<Failure>) {
         
         switch completion {
-            case .finished:
-                requester = nil
-            case .failure(.UrlError(let error)):
-                requester?.handleRequestError("Network Error, Code: \(error.code)")
-            case .failure(.other(let errorStr)):
-                requester?.handleRequestError(errorStr)
+        case .failure(let error):
+            delegate?.requestError(error)
+        default:
+            break
         }
         
         self.isLoading = false
