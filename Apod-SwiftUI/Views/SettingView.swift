@@ -20,6 +20,7 @@ struct SettingView : View {
                         HStack {
                             Image(systemName: "antenna.radiowaves.left.and.right")
                             Text("API Key")
+                                .padding(.trailing, 24)
                             
                             Spacer()
                             

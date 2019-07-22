@@ -17,18 +17,20 @@ struct ModalView : View {
     var body: some View {
         
         VStack(spacing: 0) {
-            if apod.hdurl != nil {
-                AsyncImage(url: apod.hdurl!, image: $loadedImage)
-                    .frame(idealWidth: UIScreen.main.bounds.width, minHeight: 400.0, maxHeight: 450.0)
-                    .clipped()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.top)
-                    .background(Color.white)
-            }else {
-                WebView(request: .init(url: apod.url!))
-                    .frame(maxWidth: UIScreen.main.bounds.width, minHeight: 400.0)
-                    .clipped()
+            VStack {
+                if apod.mediaType == .Image {
+                    AsyncImage(url: apod.hdurl!, image: $loadedImage)
+                        .scaledToFit()
+                        
+                }else {
+                    WebView(request: .init(url: apod.url!))
+                }
             }
+            .clipped()
+            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 400.0)
+            
+            
+            Divider()
             
             
             List {

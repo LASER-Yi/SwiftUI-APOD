@@ -16,14 +16,20 @@ struct TextEditor: View {
     var body: some View {
         List {
             Section {
-                TextField($copy)
+                ScrollView(.horizontal, showsIndicators: false) {                
+                    TextField($copy)
+                }
             }
             
             Section {
                 Button(action: {
                     self.original = self.copy
                 }) {
-                    Text("Update")
+                    HStack(alignment: .center) {
+                        Spacer()
+                        Text("Update")
+                        Spacer()
+                    }
                 }
             }
         }

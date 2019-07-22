@@ -18,7 +18,7 @@ struct Placeholder : View {
             Image(systemName: systemName)
                 .colorMultiply(.secondary)
                 .imageScale(.large)
-                .padding(.bottom, 4)
+                .padding()
             
             if showTitle != nil {
                 Text(showTitle!)

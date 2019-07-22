@@ -15,6 +15,7 @@ struct WfCardList : View {
     var body: some View {
         ForEach($apods) { apod in
             WfApodCard(apod: apod)
+                .tag(0)
         }
         .frame(width: UIScreen.main.bounds.width - 24)
     }
@@ -43,7 +44,9 @@ extension AnyTransition {
 #if DEBUG
 struct ApodCardList_Previews : PreviewProvider {
     static var previews: some View {
-        WfCardList(apods: .constant(UserData.test.localApods) )
+        ScrollView{
+            WfCardList(apods: .constant(UserData.test.localApods) )
+        }
     }
 }
 #endif
