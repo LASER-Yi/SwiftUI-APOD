@@ -9,13 +9,14 @@
 import SwiftUI
 
 struct WfApodCard : View {
-    @Binding var apod: ApodResult
     
-    let aspect: Length = 0.95
+    @State var apod: ApodResult
     
-    let height: Length = 350
+    let aspect: CGFloat = 0.95
     
-    var width: Length {
+    let height: CGFloat = 350
+    
+    var width: CGFloat {
         height * aspect
     }
     
@@ -36,7 +37,6 @@ struct WfApodCard : View {
                 if apod.mediaType == .Image {
                     AsyncImage(url: apod.url!, image: $loadedImage)
                         .scaledToFill()
-                        .animation(nil)
                     
                 }else {
                     Image(systemName: "video")
@@ -78,7 +78,7 @@ struct WfApodCard : View {
         }, content: {
             self.modal
         })
-        .tapAction {
+        .onTapGesture {
                 self.isPresent = true
         }
         .clipped()
@@ -95,9 +95,9 @@ struct WfApodCard : View {
 struct ApodBlockView_Previews : PreviewProvider {
     static var previews: some View {
         Group{
-                WfApodCard(apod: .constant(testArray[0]) )
+                WfApodCard(apod: testArray[0] )
 
-                WfApodCard(apod: .constant(testArray[1]) )
+                WfApodCard(apod: testArray[1] )
                     .colorScheme(.dark)
         }
         .padding()

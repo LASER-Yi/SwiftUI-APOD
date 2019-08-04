@@ -22,7 +22,7 @@ struct ContentView : View {
     }
     
     var body: some View {
-        TabbedView {
+        TabView {
 //            Text("Today")
 //                .tabItem {
 //                    VStack{
@@ -31,6 +31,7 @@ struct ContentView : View {
 //                    }
 //                }
 //                .tag(0)
+                
             
             WaterfallView()
                 .environmentObject(userData)

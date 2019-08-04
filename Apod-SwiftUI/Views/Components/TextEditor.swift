@@ -16,8 +16,8 @@ struct TextEditor: View {
     var body: some View {
         List {
             Section {
-                ScrollView(.horizontal, showsIndicators: false) {                
-                    TextField($copy)
+                ScrollView(.horizontal, showsIndicators: false) {
+                    TextField("Editor", text: $copy)
                 }
             }
             

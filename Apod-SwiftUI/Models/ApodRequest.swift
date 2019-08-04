@@ -111,6 +111,8 @@ struct ApodRequest {
                     throw RequestError.Other(error.msg)
                 }else if let error = try? decoder.decode(ApodResult.LimitError.self, from: data) {
                     throw RequestError.Other(error.error.message)
+                }else {
+                    throw RequestError.Other("Unknown Error")
                 }
                 
                 return results

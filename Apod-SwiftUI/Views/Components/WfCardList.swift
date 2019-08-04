@@ -12,10 +12,19 @@ struct WfCardList : View {
     
     @Binding var apods: [ApodResult]
     
+    @State var loadMsg: (String, String)
+    
     var body: some View {
-        ForEach($apods) { apod in
-            WfApodCard(apod: apod)
-                .tag(0)
+        VStack{
+            if apods.isEmpty {
+                Placeholder(systemName: loadMsg.0, showTitle: loadMsg.1)
+                    .padding(.top, 180)
+            }else {
+                ForEach(apods) { apod in
+                    WfApodCard(apod: apod)
+                        .padding([.top, .bottom])
+                }
+            }
         }
         .frame(width: UIScreen.main.bounds.width - 24)
     }
@@ -45,7 +54,8 @@ extension AnyTransition {
 struct ApodCardList_Previews : PreviewProvider {
     static var previews: some View {
         ScrollView{
-            WfCardList(apods: .constant(UserData.test.localApods) )
+            WfCardList(apods: .constant(UserData.test.localApods),
+                       loadMsg: ("cloud.rain" ,"Loading") )
         }
     }
 }

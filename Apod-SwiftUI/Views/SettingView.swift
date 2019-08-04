@@ -40,19 +40,25 @@ struct SettingView : View {
                 }
                 
                 Section {
-                    HStack {
-                        Image(systemName: "heart")
-                        Text("Github")
-                        
-                        Spacer()
-                        
-                        Text("APOD-SwiftUI")
-                            .foregroundColor(.secondary)
+                    Button(action: {
+                        UIApplication.shared.open(URL(string: "https://github.com/LASER-Yi/SwiftUI-APOD")!, options: [:], completionHandler: nil)
+                    }) {
+                        HStack {
+                            Image(systemName: "heart")
+                                .foregroundColor(.primary)
+                            Text("Github")
+                                .foregroundColor(.primary)
+                            
+                            Spacer()
+                            
+                            Text("APOD-SwiftUI")
+                                .foregroundColor(.secondary)
+                        }
                     }
                     
                 }
             }
-            .listStyle(.grouped)
+            .listStyle(GroupedListStyle())
             .navigationBarTitle(Text("Settings"), displayMode: .inline)
         }
     }

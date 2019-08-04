@@ -13,9 +13,7 @@ protocol RequestDelegate {
     func requestError(_ error: ApodRequest.RequestError)
 }
 
-final class UserData: BindableObject {
-    
-    let willChange = PassthroughSubject<UserData, Never>()
+final class UserData: ObservableObject {
     
     static let shared = UserData()
     
@@ -30,9 +28,8 @@ final class UserData: BindableObject {
     }
 #endif
     
-    var apiKey: String {
+     var apiKey: String {
         set {
-            willChange.send(self)
             UserDefaults.saveCustomValue(for: .ApiKey, value: newValue)
         }
         get {
@@ -47,7 +44,6 @@ final class UserData: BindableObject {
     
     var loadHdImage: Bool {
         set {
-            willChange.send(self)
             UserDefaults.saveCustomValue(for: .AutoHdImage, value: newValue)
         }
         get {
@@ -60,29 +56,11 @@ final class UserData: BindableObject {
         }
     }
     
-    var localApods: [ApodResult] = [] {
-        willSet {
-            DispatchQueue.main.async {
-                self.willChange.send(self)
-            }
-        }
-    }
+    @Published var localApods: [ApodResult] = []
     
-    var randomApods: [ApodResult] = [] {
-        willSet {
-            DispatchQueue.main.async {
-                self.willChange.send(self)
-            }
-        }
-    }
+    @Published var randomApods: [ApodResult] = []
     
-    var savedApods: [ApodResult] = [] {
-        willSet {
-            DispatchQueue.main.async {
-                self.willChange.send(self)
-            }
-        }
-    }
+    @Published var savedApods: [ApodResult] = []
     
     func updateSaved() {
         let allLoaded = localApods + randomApods
@@ -98,19 +76,20 @@ final class UserData: BindableObject {
         case saved = "Saved"
     }
     
-    var loadType: ApodLoadType = .recent {
-        didSet {
-            self.requestApod()
+    @Published var loadType: ApodLoadType = .recent
+    
+    var isSelectEmpty: Bool {
+        switch loadType {
+        case .recent:
+            return localApods.isEmpty
+        case .random:
+            return randomApods.isEmpty
+        case .saved:
+            return savedApods.isEmpty
         }
     }
     
-    var isLoading: Bool = false {
-        willSet {
-            DispatchQueue.main.async {
-                self.willChange.send(self)
-            }
-        }
-    }
+    @Published var isLoading: Bool = false
     
     var savedSubscription: Subscription? = nil
     
@@ -153,13 +132,15 @@ extension UserData: Subscriber {
     }
     
     func receive(_ input: Input) -> Subscribers.Demand {
-        if self.loadType == .recent {
-            localApods = input
-        }else if self.loadType == .random {
-            randomApods = input
+        DispatchQueue.main.async {
+            if self.loadType == .recent {
+                self.localApods = input
+            }else if self.loadType == .random {
+                self.randomApods = input
+            }
+            
+            self.isLoading = false
         }
-        
-        self.isLoading = false
         
         if input.count == 0 {
             return .max(1)
@@ -177,7 +158,9 @@ extension UserData: Subscriber {
             break
         }
         
-        self.isLoading = false
+        DispatchQueue.main.sync {
+            self.isLoading = false
+        }
         
     }
     

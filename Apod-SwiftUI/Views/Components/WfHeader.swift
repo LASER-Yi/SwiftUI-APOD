@@ -16,9 +16,9 @@ struct WfHeader: View {
         return formatter.string(from: .init())
     }
     
-    var reloadFunc: () -> ()
+    var reloadDelegate: () -> ()
     
-    @EnvironmentObject var userData: UserData
+    @Binding var loadState: Bool
     
     @State var btnAngle = 180.0
     
@@ -38,16 +38,16 @@ struct WfHeader: View {
                 Spacer()
                 
                 Button(action: {
-                    self.reloadFunc()
+                    self.reloadDelegate()
                 }) {
                     Image(systemName: "arrow.2.circlepath.circle")
                         .imageScale(.large)
-                        .rotationEffect(Angle(degrees: userData.isLoading ? btnAngle : 0))
+                        .rotationEffect(Angle(degrees: self.loadState ? btnAngle : 0))
                         .animation(.easeInOut)
-                        .disabled(userData.isLoading == true)
+                        .disabled(self.loadState == true)
                         .onAppear {
                             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                                if self.userData.isLoading {
+                                if self.loadState {
                                     self.btnAngle += 12.0
                                     self.btnAngle.formTruncatingRemainder(dividingBy: 360.0)
                                 }else {
@@ -68,8 +68,7 @@ struct WfHeader: View {
 #if DEBUG
 struct Header_Previews : PreviewProvider {
     static var previews: some View {
-        WfHeader(reloadFunc: {})
-            .environmentObject(UserData.test)
+        WfHeader(reloadDelegate: {}, loadState: .constant(false) )
             .previewLayout(.sizeThatFits)
     }
 }
