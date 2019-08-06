@@ -48,10 +48,18 @@ struct AsyncImage: View {
                     throw URLError(.unknown)
                 }
             })
-            .catch{ error in
-                return Just(nil)
-            }
-            .assign(to: \.image, on: self)
+            .sink(receiveCompletion: { (completion) in
+                switch completion {
+                case .failure(let error):
+                    self.imageName = "xmark.square"
+                    break
+                default:
+                    break
+                }
+            }, receiveValue: { (image) in
+                self.image = image
+            })
+
     }
 }
 

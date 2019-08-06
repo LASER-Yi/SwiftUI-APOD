@@ -25,7 +25,8 @@
 		ECC8282622D71A50001F38A3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282522D71A50001F38A3 /* SettingView.swift */; };
 		ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282722D78BC8001F38A3 /* WebView.swift */; };
 		ECC8282A22D83AEF001F38A3 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282922D83AEF001F38A3 /* Placeholder.swift */; };
-		ECC8282C22D83BBF001F38A3 /* WfCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282B22D83BBF001F38A3 /* WfCardList.swift */; };
+		ECC8282C22D83BBF001F38A3 /* WfLoaderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282B22D83BBF001F38A3 /* WfLoaderList.swift */; };
+		ECE55E8322F6D5C000F8ABBE /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE55E8222F6D5C000F8ABBE /* UserSetting.swift */; };
 		ECFEBD5622E4C018008E0613 /* UserDefaults+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFEBD5522E4C018008E0613 /* UserDefaults+Helper.swift */; };
 		ECFEBD5822E4D010008E0613 /* TextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFEBD5722E4D010008E0613 /* TextEditor.swift */; };
 /* End PBXBuildFile section */
@@ -51,7 +52,8 @@
 		ECC8282522D71A50001F38A3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		ECC8282722D78BC8001F38A3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ECC8282922D83AEF001F38A3 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
-		ECC8282B22D83BBF001F38A3 /* WfCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfCardList.swift; sourceTree = "<group>"; };
+		ECC8282B22D83BBF001F38A3 /* WfLoaderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WfLoaderList.swift; sourceTree = "<group>"; };
+		ECE55E8222F6D5C000F8ABBE /* UserSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
 		ECFEBD5522E4C018008E0613 /* UserDefaults+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UserDefaults+Helper.swift"; path = "../../../../../../../System/Volumes/Data/Users/Liang/Local/Projects/Apod-SwiftUI/Apod-SwiftUI/Models/UserDefaults+Helper.swift"; sourceTree = "<group>"; };
 		ECFEBD5722E4D010008E0613 /* TextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextEditor.swift; path = "../../../../../../../../System/Volumes/Data/Users/Liang/Local/Projects/Apod-SwiftUI/Apod-SwiftUI/Views/Components/TextEditor.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,6 +127,7 @@
 				EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */,
 				ECC7DF1F22D4D8A800D583A1 /* UserData.swift */,
 				ECFEBD5522E4C018008E0613 /* UserDefaults+Helper.swift */,
+				ECE55E8222F6D5C000F8ABBE /* UserSetting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -136,7 +139,7 @@
 				ECC8282722D78BC8001F38A3 /* WebView.swift */,
 				EC166A9022DB51EB0003F74A /* WfHeader.swift */,
 				ECC7DF1A22D4D6E200D583A1 /* WfApodCard.swift */,
-				ECC8282B22D83BBF001F38A3 /* WfCardList.swift */,
+				ECC8282B22D83BBF001F38A3 /* WfLoaderList.swift */,
 				ECC8282922D83AEF001F38A3 /* Placeholder.swift */,
 				EC4E1EEC22D88E7700B95491 /* Background.swift */,
 				ECFEBD5722E4D010008E0613 /* TextEditor.swift */,
@@ -229,7 +232,8 @@
 				ECC7DF1E22D4D80C00D583A1 /* ApodResult.swift in Sources */,
 				ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */,
 				ECC8282422D71775001F38A3 /* WaterfallView.swift in Sources */,
-				ECC8282C22D83BBF001F38A3 /* WfCardList.swift in Sources */,
+				ECC8282C22D83BBF001F38A3 /* WfLoaderList.swift in Sources */,
+				ECE55E8322F6D5C000F8ABBE /* UserSetting.swift in Sources */,
 				ECC8282622D71A50001F38A3 /* SettingView.swift in Sources */,
 				ECC8282A22D83AEF001F38A3 /* Placeholder.swift in Sources */,
 				EC4E1EED22D88E7700B95491 /* Background.swift in Sources */,

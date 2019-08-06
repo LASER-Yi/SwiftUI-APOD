@@ -9,6 +9,14 @@
 import Foundation
 import SwiftUI
 
+struct ApodBlockData: Hashable, Codable, Identifiable {
+    var id: UUID = UUID()
+    
+    let content: ApodResult
+    
+    var favourite: Bool = false
+}
+
 struct ApodResult: Hashable, Codable,  Identifiable {
     var id: UUID = UUID()
     
@@ -23,19 +31,27 @@ struct ApodResult: Hashable, Codable,  Identifiable {
     var title: String
     var thumbnailUrl: URL?
     
-    var favourite: Bool = false
-    
-    struct Error: Codable {
+    struct ApodError: Decodable {
         var code: Int
         var msg: String
-    }
-    
-    struct LimitError: Codable {
-        struct Error: Codable {
-            var code: String
-            var message: String
+        
+        init(from decoder: Decoder) throws {
+            let values = try decoder.container(keyedBy: CodingKeys.self)
+            
+            self.code = try values.decode(Int.self, forKey: CodingKeys.code)
+            
+            do {
+                self.msg = try values.decode(String.self, forKey: CodingKeys.msg)
+            } catch {
+                self.msg = try values.decode(String.self, forKey: CodingKeys.message)
+            }
         }
-        var error: Error
+        
+        enum CodingKeys: String, CodingKey {
+            case code
+            case msg
+            case message
+        }
     }
     
     static var dateFormatter: DateFormatter {
@@ -101,9 +117,7 @@ let testApodArray = """
 
 var decoder = JSONDecoder();
 
-let testData = try! decoder.decode(ApodResult.self, from: testApodStr.data(using: .utf8)!)
+let singleApod = try! decoder.decode(ApodResult.self, from: testApodStr.data(using: .utf8)!)
 
-let testArray = try! decoder.decode(Array<ApodResult>.self, from: testApodArray.data(using: .utf8)!)
-
-var testUserData = UserData()
+let arrayApods = try! decoder.decode(Array<ApodResult>.self, from: testApodArray.data(using: .utf8)!)
 #endif

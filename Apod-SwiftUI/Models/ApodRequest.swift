@@ -10,6 +10,37 @@ import Foundation
 import Combine
 
 struct ApodRequest {
+    
+    public init(type: LoadType) {
+        self.type = type
+    }
+    
+    enum LoadType {
+        case refresh
+        case append
+    }
+    
+    let type: LoadType
+    
+    private var delegate: [RequestDelegate] = []
+    
+    mutating func bindingDelegate(_ delegate: RequestDelegate) {
+        self.delegate.append(delegate)
+    }
+    
+    func boardcastSuccess(_ apods: [ApodBlockData]) {
+        delegate.forEach { (delegate) in
+            delegate.requestSuccess(apods, type)
+        }
+    }
+    
+    func boardcastFailure(_ error: RequestError) {
+        delegate.forEach { (delegate) in
+            delegate.requestError(error)
+        }
+    }
+    
+    // API Part
     var date: Date?
     var concept_tags: Bool? // turn off
     var hd: Bool?
@@ -17,9 +48,9 @@ struct ApodRequest {
     var start_date: Date?
     var end_date: Date?
     var thumbs: Bool?
-    var api_key: String
+    var api_key: String = UserSetting.shared.apiKey
     
-    enum ReflectionKey: String {
+    private enum ReflectionKey: String {
         case date
         case concept_tags
         case hd
@@ -76,8 +107,8 @@ struct ApodRequest {
         return dic
     }
     
-    func sendRequest<S>(subscriber: S)
-    where S: Subscriber, S.Failure == RequestError, S.Input == [ApodResult]
+    func sendRequest() -> some AnyCancellable
+    // where S: Subscriber, S.Failure == RequestError, S.Input == [ApodResult]
     {
         let header = makeRequestHeader().map { (key, value) -> URLQueryItem in
             URLQueryItem(name: key, value: value)
@@ -91,7 +122,7 @@ struct ApodRequest {
         var request = URLRequest(url: url);
         request.httpMethod = "GET"
         
-        URLSession.shared.dataTaskPublisher(for: request)
+        let task = URLSession.shared.dataTaskPublisher(for: request)
             .mapError({ (error) -> RequestError in
                 RequestError.UrlError(error)
             })
@@ -107,10 +138,10 @@ struct ApodRequest {
                     results.append(contentsOf: array)
                 }else if let single = try? decoder.decode(ApodResult.self, from: data) {
                     results.append(single)
-                }else if let error = try? decoder.decode(ApodResult.Error.self, from: data){
+                }else if let error = try? decoder.decode(ApodResult.ApodError.self, from: data){
                     throw RequestError.Other(error.msg)
-                }else if let error = try? decoder.decode(ApodResult.LimitError.self, from: data) {
-                    throw RequestError.Other(error.error.message)
+                }else if let error = try? decoder.decode([String: ApodResult.ApodError].self, from: data) {
+                    throw RequestError.Other(error.first!.value.msg)
                 }else {
                     throw RequestError.Other("Unknown Error")
                 }
@@ -120,6 +151,31 @@ struct ApodRequest {
             .mapError({ error in
                 error as! RequestError
             })
-            .receive(subscriber: subscriber)
+            .sink(receiveCompletion: { (completion) in
+                
+                switch completion {
+                case .failure(let error):
+                    self.boardcastFailure(error)
+                default:
+                    break
+                }
+                
+            })
+            { (input: [ApodResult]) in
+                let block: [ApodBlockData] = input.map { (result) -> ApodBlockData in
+                    ApodBlockData(content: result)
+                }
+                
+                self.boardcastSuccess(block)
+            }
+            
+        
+        return task
     }
+}
+
+protocol RequestDelegate {
+    func requestError(_ error: ApodRequest.RequestError)
+    
+    func requestSuccess(_ apods: [ApodBlockData], _ type: ApodRequest.LoadType)
 }

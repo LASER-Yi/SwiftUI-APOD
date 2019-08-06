@@ -10,7 +10,11 @@ import SwiftUI
 
 struct WfApodCard : View {
     
-    @State var apod: ApodResult
+    @State var block: ApodBlockData
+    
+    var apod: ApodResult {
+        block.content
+    }
     
     let aspect: CGFloat = 0.95
     
@@ -25,7 +29,7 @@ struct WfApodCard : View {
     @State var loadedImage: UIImage? = nil
     
     var modal: some View {
-        let view = ModalView(apod: $apod, loadedImage: $loadedImage)
+        let view = ModalView(block: $block, loadedImage: $loadedImage)
         
         return view
     }
@@ -44,7 +48,7 @@ struct WfApodCard : View {
                 }
             }
             .frame(width: width, height: height)
-            .background(Background(color: .systemGray5))
+            .background(Color.init(.systemGray5))
             
             
             
@@ -95,10 +99,10 @@ struct WfApodCard : View {
 struct ApodBlockView_Previews : PreviewProvider {
     static var previews: some View {
         Group{
-                WfApodCard(apod: testArray[0] )
+            WfApodCard(block: .init(content: arrayApods[0])  )
 
-                WfApodCard(apod: testArray[1] )
-                    .colorScheme(.dark)
+            WfApodCard(block: .init(content: arrayApods[1]) )
+                .colorScheme(.dark)
         }
         .padding()
         .previewLayout(.sizeThatFits)

@@ -10,13 +10,17 @@ import SwiftUI
 
 struct ModalView : View {
     
-    @Binding var apod: ApodResult
+    @Binding var block: ApodBlockData
+    
+    var apod: ApodResult {
+        block.content
+    }
     
     @Binding var loadedImage: UIImage?
     
     var body: some View {
         
-        VStack(spacing: 0) {
+        List {
             VStack {
                 if apod.mediaType == .Image {
                     AsyncImage(url: apod.hdurl!, image: $loadedImage)
@@ -29,44 +33,40 @@ struct ModalView : View {
             .clipped()
             .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 400.0)
             
-            
-            Divider()
-            
-            
-            List {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(apod.title)
-                        .font(.largeTitle)
-                        .bold()
-                        .lineLimit(2)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(apod.title)
+                    .font(.largeTitle)
+                    .bold()
+                    .lineLimit(2)
+                
+                HStack {
+                    Text(apod.getFormatterDate())
+                        .font(.headline)
+                        .foregroundColor(.gray)
                     
-                    HStack {
-                        Text(apod.getFormatterDate())
-                            .font(.headline)
-                            .foregroundColor(.gray)
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            self.apod.favourite.toggle()
-                        }) {
-                            Image(systemName: self.apod.favourite ? "star.fill" : "star")
-                                .imageScale(.small)
-                                .foregroundColor(self.apod.favourite ? .yellow : .gray)
-                        }
+                    Spacer()
+                    
+                    Button(action: {
+                        self.block.favourite.toggle()
+                    }) {
+                        Image(systemName: self.block.favourite ? "star.fill" : "star")
+                            .imageScale(.small)
+                            .foregroundColor(self.block.favourite ? .yellow : .gray)
                     }
                     
+                    
                 }
                 
-                
-                Text(apod.explanation)
-                    .font(.body)
-                    .lineLimit(nil)
-                    .multilineTextAlignment(.leading)
-                
-                if apod.copyright != nil {
-                    Text("© \(apod.copyright!)")
-                }
+            }
+            
+            
+            Text(apod.explanation)
+                .font(.body)
+                .lineLimit(nil)
+                .multilineTextAlignment(.leading)
+            
+            if apod.copyright != nil {
+                Text("© \(apod.copyright!)")
             }
         }
     }
@@ -75,7 +75,7 @@ struct ModalView : View {
 #if DEBUG
 struct ApodModal_Previews : PreviewProvider {
     static var previews: some View {
-        ModalView(apod: .constant(UserData.test.localApods.first!) , loadedImage: .constant(nil))
+        ModalView(block: .constant(.init(content: singleApod)) , loadedImage: .constant(nil))
     }
 }
 #endif

@@ -10,17 +10,6 @@ import SwiftUI
 
 struct ContentView : View {
     
-    @EnvironmentObject var userData: UserData
-    
-    @State var isAlertPresented = false
-    
-    @State var alert: Alert? = nil
-    
-    func makeAlert(title: String, msg: String) {
-        alert = Alert(title: Text(title), message: Text(msg))
-        isAlertPresented = true
-    }
-    
     var body: some View {
         TabView {
 //            Text("Today")
@@ -34,7 +23,7 @@ struct ContentView : View {
                 
             
             WaterfallView()
-                .environmentObject(userData)
+                .environmentObject(UserData.shared)
                 .tabItem {
                     VStack{
                         Image(systemName: "skew")
@@ -44,7 +33,7 @@ struct ContentView : View {
                 .tag(1)
             
             SettingView()
-                .environmentObject(userData)
+                .environmentObject(UserSetting.shared)
                 .tabItem {
                     VStack {
                         Image(systemName: "gear")
@@ -53,35 +42,18 @@ struct ContentView : View {
                 }
                 .tag(2)
         }
-        .alert(isPresented: $isAlertPresented) { alert! }
-        .onAppear{
-            self.userData.delegate = self
-        }
     }
 }
 
-extension ContentView: RequestDelegate {
-    func requestError(_ error: ApodRequest.RequestError) {
-        switch error {
-        case .Other(let msg):
-            makeAlert(title: "Error", msg: msg)
-        case .UrlError(let error):
-            makeAlert(title: "Network Error", msg: error.localizedDescription)
-        default:
-            break
-        }
-    }
-}
+
 
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
-                .environmentObject(UserData.test)
             
             ContentView()
-                .environmentObject(UserData.test)
                 .colorScheme(.dark)
         }
         

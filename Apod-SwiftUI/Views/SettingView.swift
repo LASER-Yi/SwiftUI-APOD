@@ -10,13 +10,13 @@ import SwiftUI
 
 struct SettingView : View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var setting: UserSetting
     
     var body: some View {
         NavigationView {
             List {
                 Section {
-                    NavigationLink(destination: TextEditor(original: $userData.apiKey)) {
+                    NavigationLink(destination: TextEditor(original: $setting.apiKey)) {
                         HStack {
                             Image(systemName: "antenna.radiowaves.left.and.right")
                             Text("API Key")
@@ -24,14 +24,15 @@ struct SettingView : View {
                             
                             Spacer()
                             
-                            Text(userData.apiKey)
+                            Text(setting.apiKey)
                                 .foregroundColor(.secondary)
+                                .truncationMode(.tail)
                         }
                     }
                     
                     
                     
-                    Toggle(isOn: $userData.loadHdImage) {
+                    Toggle(isOn: $setting.loadHdImage) {
                         HStack {
                             Image(systemName: "map")
                             Text("HD Image")
@@ -68,7 +69,7 @@ struct SettingView : View {
 struct SettingView_Previews : PreviewProvider {
     static var previews: some View {
         SettingView()
-            .environmentObject(UserData.test)
+            .environmentObject(UserSetting.shared)
     }
 }
 #endif
