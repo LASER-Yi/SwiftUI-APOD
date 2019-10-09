@@ -59,9 +59,9 @@ extension WaterfallView: RequestDelegate {
     
     func requestSuccess(_ apods: [ApodBlockData], _ type: ApodRequest.LoadType) {
         if type == .refresh {
-            selectedContent.value = apods
+            selectedContent.wrappedValue = apods
         }else {
-            selectedContent.value.append(contentsOf: apods)
+            selectedContent.wrappedValue.append(contentsOf: apods)
         }
     }
     

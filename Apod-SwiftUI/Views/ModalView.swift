@@ -19,54 +19,55 @@ struct ModalView : View {
     @Binding var loadedImage: UIImage?
     
     var body: some View {
-        
-        List {
+        VStack{
             VStack {
-                if apod.mediaType == .Image {
-                    AsyncImage(url: apod.hdurl!, image: $loadedImage)
-                        .scaledToFit()
-                        
-                }else {
-                    WebView(request: .init(url: apod.url!))
+                    if apod.mediaType == .Image {
+                        AsyncImage(url: apod.hdurl!, image: $loadedImage)
+                            .scaledToFit()
+                            
+                    }else {
+                        WebView(request: .init(url: apod.url!))
+                    }
                 }
-            }
-            .clipped()
-            .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: 400.0)
+                .clipped()
+                .padding(0.0)
             
-            VStack(alignment: .leading, spacing: 4) {
-                Text(apod.title)
-                    .font(.largeTitle)
-                    .bold()
-                    .lineLimit(2)
-                
-                HStack {
-                    Text(apod.getFormatterDate())
-                        .font(.headline)
-                        .foregroundColor(.gray)
+            List {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(apod.title)
+                        .font(.largeTitle)
+                        .bold()
+                        .lineLimit(2)
                     
-                    Spacer()
-                    
-                    Button(action: {
-                        self.block.favourite.toggle()
-                    }) {
-                        Image(systemName: self.block.favourite ? "star.fill" : "star")
-                            .imageScale(.small)
-                            .foregroundColor(self.block.favourite ? .yellow : .gray)
+                    HStack {
+                        Text(apod.getFormatterDate())
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            self.block.favourite.toggle()
+                        }) {
+                            Image(systemName: self.block.favourite ? "star.fill" : "star")
+                                .imageScale(.small)
+                                .foregroundColor(self.block.favourite ? .yellow : .gray)
+                        }
+                        
+                        
                     }
                     
-                    
                 }
                 
-            }
-            
-            
-            Text(apod.explanation)
-                .font(.body)
-                .lineLimit(nil)
-                .multilineTextAlignment(.leading)
-            
-            if apod.copyright != nil {
-                Text("© \(apod.copyright!)")
+                
+                Text(apod.explanation)
+                    .font(.body)
+                    .lineLimit(nil)
+                    .multilineTextAlignment(.leading)
+                
+                if apod.copyright != nil {
+                    Text("© \(apod.copyright!)")
+                }
             }
         }
     }

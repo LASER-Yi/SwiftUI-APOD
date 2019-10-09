@@ -50,7 +50,7 @@ struct AsyncImage: View {
             })
             .sink(receiveCompletion: { (completion) in
                 switch completion {
-                case .failure(let error):
+                case .failure(_):
                     self.imageName = "xmark.square"
                     break
                 default:
