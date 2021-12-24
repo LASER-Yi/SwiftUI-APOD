@@ -9,36 +9,46 @@
 import SwiftUI
 import Combine
 
-struct AsyncImage: View {
+struct AsyncImage<Placeholder: View>: View {
     let url: URL
     
     @Binding var image: UIImage?
     
-    @State var loadTask: AnyCancellable? = nil
+    var placeHolder: Placeholder
     
-    @State var imageName: String = "arrow.down.square.fill"
+    @State private var loadTask: AnyCancellable? = nil
+    
+    init(url: URL, image: Binding<UIImage?> = .constant(nil), @ViewBuilder placeHolder: () -> Placeholder) {
+        self.url = url
+        self._image = image
+        self.placeHolder = placeHolder()
+    }
     
     var body: some View {
-        VStack {
-            if image == nil {
-                Placeholder(systemName: imageName, showTitle: nil)
-            }else {
-                Image(uiImage: image!)
-                    .renderingMode(.original)
+        VStack(alignment: .center) {
+            if let image = self.image {
+                Image(uiImage: image)
                     .resizable()
+                    .transition(.opacity)
+                    .animation(.easeInOut)
+            }else {
+                placeHolder
             }
-            
         }
+        .frame(maxWidth: .infinity, alignment: .center)
         .onAppear {
             self.loadImage()
         }
         .onDisappear {
             self.loadTask?.cancel()
+            self.loadTask = nil
         }
     }
     
     private func loadImage() {
         let session = URLSession(configuration: .default)
+        
+        guard loadTask == nil && image == nil else { return }
         
         loadTask = session.dataTaskPublisher(for: url)
             .tryMap({ (data, response) -> UIImage in
@@ -51,13 +61,14 @@ struct AsyncImage: View {
             .sink(receiveCompletion: { (completion) in
                 switch completion {
                 case .failure(_):
-                    self.imageName = "xmark.square"
                     break
                 default:
                     break
                 }
             }, receiveValue: { (image) in
-                self.image = image
+                withAnimation {
+                    self.image = image
+                }
             })
 
     }
@@ -67,11 +78,23 @@ struct AsyncImage: View {
 struct AsyncImage_Previews : PreviewProvider {
     static var previews: some View {
         
-        AsyncImage(url: URL(string: "https://img3.doubanio.com/view/status/l/public/4dc4add0fd63152.jpg")!, image: .constant(nil))
+        Group {
+            
+            AsyncImage(url: debugApodList[0].hdurl!) {
+                ProgressView()
+            }
             .frame(width: 300, height: 300)
-            .background(Color.white)
-            .cornerRadius(8)
-            .shadow(radius: 4)
+            
+            AsyncImage(url: debugApodList[1].hdurl!) {
+                Text("We are preparing your APOD experience")
+            }
+            .padding()
+            .border(Color.blue, width: 1.0)
+            
+        }
+        .previewLayout(.sizeThatFits)
+        
+
     }
 }
 #endif

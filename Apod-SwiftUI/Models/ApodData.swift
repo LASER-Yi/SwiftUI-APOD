@@ -46,19 +46,9 @@ struct ApodData: Hashable, Codable,  Identifiable {
         }
     }
     
-    static var dateFormatter: DateFormatter {
-        let fm = DateFormatter()
-        fm.dateFormat = "YYYY-MM-dd"
-        return fm
-    }
-    
-    func getFormatterDate() -> String {
-        return Self.dateFormatter.string(from: date)
-    }
-    
     enum MediaType: String, Codable {
-        case Image = "image"
-        case Video = "video"
+        case image = "image"
+        case video = "video"
     }
     
     enum CodingKeys: String, CodingKey {
@@ -93,6 +83,48 @@ struct ApodData: Hashable, Codable,  Identifiable {
         
         self.thumbnailUrl = try values.decode(URL.self, forKey: CodingKeys.mediaType)
     }
+    
+    static var dateFormatter: DateFormatter {
+        let fm = DateFormatter()
+        fm.dateFormat = "YYYY-MM-dd"
+        return fm
+    }
+    
+    func getFormatterDate() -> String {
+        return Self.dateFormatter.string(from: date)
+    }
+    
+    func getImageUrl() -> URL? {
+        if UserSetting.shared.loadHdImage {
+            if self.hdurl != nil {
+                return self.hdurl
+            } else {
+                return self.url
+            }
+        } else {
+            return self.url
+        }
+    }
+}
+
+class ApodRuntimeData: Hashable {
+    
+    static func == (lhs: ApodRuntimeData, rhs: ApodRuntimeData) -> Bool {
+        return lhs.data == rhs.data
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(data)
+    }
+    
+    var data: ApodData
+    
+    @State var image: UIImage?
+    
+    init(_ data: ApodData, image: UIImage?) {
+        self.data = data
+        self.image = image
+    }
 }
 
 
@@ -109,7 +141,5 @@ let testApodArray = """
 
 var decoder = JSONDecoder();
 
-let singleApod = try! decoder.decode(ApodData.self, from: testApodStr.data(using: .utf8)!)
-
-let arrayApods = try! decoder.decode(Array<ApodData>.self, from: testApodArray.data(using: .utf8)!)
+let debugApodList = try! decoder.decode(Array<ApodData>.self, from: testApodArray.data(using: .utf8)!)
 #endif

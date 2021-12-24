@@ -12,15 +12,23 @@ struct SettingView : View {
     
     @EnvironmentObject var setting: UserSetting
     
+    var apiEditor: some View {
+        List {
+            Section {
+                TextEditor(text: $setting.apiKey)
+            }
+        }
+        .listStyle(GroupedListStyle())
+    }
+    
     var body: some View {
         NavigationView {
             List {
                 Section {
-                    NavigationLink(destination: TextEditor(original: $setting.apiKey)) {
+                    NavigationLink(destination: apiEditor) {
                         HStack {
                             Image(systemName: "antenna.radiowaves.left.and.right")
                             Text("API Key")
-                                .padding(.trailing, 24)
                             
                             Spacer()
                             
@@ -29,8 +37,6 @@ struct SettingView : View {
                                 .truncationMode(.tail)
                         }
                     }
-                    
-                    
                     
                     Toggle(isOn: $setting.loadHdImage) {
                         HStack {
@@ -59,7 +65,7 @@ struct SettingView : View {
                     
                 }
             }
-            .listStyle(GroupedListStyle())
+            .listStyle(SidebarListStyle())
             .navigationBarTitle(Text("Settings"), displayMode: .inline)
         }
     }
