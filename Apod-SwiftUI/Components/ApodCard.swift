@@ -29,10 +29,8 @@ struct ApodCard : View {
     
     @State var isPresent: Bool = false
     
-    @State var loadedImage: UIImage? = nil
-    
     var modal: some View {
-        let view = ArticleView(content: apod, image: $loadedImage)
+        let view = Article(content: apod)
         
         return view
     }
@@ -69,9 +67,7 @@ struct ApodCard : View {
     var body: some View {
         VStack {
             if apod.mediaType == .image {
-                AsyncImage(url: apod.url!, image: $loadedImage) {
-                    ProgressView()
-                }
+                AsyncImage(url: apod.url!)
                     .scaledToFill()
                     .frame(width: width, height: height)
                 

@@ -48,7 +48,7 @@ struct SettingView : View {
                 
                 Section {
                     Button(action: {
-                        UIApplication.shared.open(URL(string: "https://github.com/LASER-Yi/SwiftUI-APOD")!, options: [:], completionHandler: nil)
+                        UIApplication.shared.open(Constants.GithubURL, options: [:], completionHandler: nil)
                     }) {
                         HStack {
                             Image(systemName: "heart")
@@ -65,7 +65,6 @@ struct SettingView : View {
                     
                 }
             }
-            .listStyle(SidebarListStyle())
             .navigationBarTitle(Text("Settings"), displayMode: .inline)
         }
     }

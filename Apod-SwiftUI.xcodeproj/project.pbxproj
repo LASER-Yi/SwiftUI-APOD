@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		EC17C35324A49E6500BC9396 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC17C35224A49E6500BC9396 /* TodayView.swift */; };
 		EC17C35624A4BE0100BC9396 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC17C35524A4BE0100BC9396 /* ContentView.swift */; };
-		EC17C36124A7665B00BC9396 /* ApodMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC17C36024A7665A00BC9396 /* ApodMediaView.swift */; };
+		EC17C36124A7665B00BC9396 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC17C36024A7665A00BC9396 /* Media.swift */; };
 		EC77D1E422D5E7F70095D3D4 /* ApodRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */; };
-		EC77D1E622D5EF870095D3D4 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77D1E522D5EF870095D3D4 /* AsyncImage.swift */; };
+		EC7D07922776329300A21643 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D07912776329300A21643 /* Constants.swift */; };
+		EC7D0794277633AB00A21643 /* ConfigField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D0793277633AB00A21643 /* ConfigField.swift */; };
 		ECB72ABF24AF6880000F551A /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB72ABE24AF6880000F551A /* ImageViewer.swift */; };
 		ECC7DF0722D4D62B00D583A1 /* ApodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF0622D4D62B00D583A1 /* ApodApp.swift */; };
 		ECC7DF0922D4D62F00D583A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0822D4D62F00D583A1 /* Assets.xcassets */; };
@@ -19,21 +20,21 @@
 		ECC7DF1B22D4D6E200D583A1 /* ApodCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1A22D4D6E200D583A1 /* ApodCard.swift */; };
 		ECC7DF1E22D4D80C00D583A1 /* ApodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1D22D4D80C00D583A1 /* ApodData.swift */; };
 		ECC7DF2022D4D8A800D583A1 /* RuntimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF1F22D4D8A800D583A1 /* RuntimeData.swift */; };
-		ECC8282222D637A2001F38A3 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282122D637A2001F38A3 /* ArticleView.swift */; };
+		ECC8282222D637A2001F38A3 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282122D637A2001F38A3 /* Article.swift */; };
 		ECC8282622D71A50001F38A3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282522D71A50001F38A3 /* SettingView.swift */; };
 		ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282722D78BC8001F38A3 /* WebView.swift */; };
 		ECC8282A22D83AEF001F38A3 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282922D83AEF001F38A3 /* Placeholder.swift */; };
 		ECC8282C22D83BBF001F38A3 /* ApodCardList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282B22D83BBF001F38A3 /* ApodCardList.swift */; };
 		ECE55E8322F6D5C000F8ABBE /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE55E8222F6D5C000F8ABBE /* UserSetting.swift */; };
-		ECFEBD5622E4C018008E0613 /* UserDefaults+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECFEBD5522E4C018008E0613 /* UserDefaults+Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EC17C35224A49E6500BC9396 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		EC17C35524A4BE0100BC9396 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		EC17C36024A7665A00BC9396 /* ApodMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodMediaView.swift; sourceTree = "<group>"; };
+		EC17C36024A7665A00BC9396 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodRequest.swift; sourceTree = "<group>"; };
-		EC77D1E522D5EF870095D3D4 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
+		EC7D07912776329300A21643 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EC7D0793277633AB00A21643 /* ConfigField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigField.swift; sourceTree = "<group>"; };
 		ECB72ABE24AF6880000F551A /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		ECC7DEFF22D4D62B00D583A1 /* Apod-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apod-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECC7DF0622D4D62B00D583A1 /* ApodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodApp.swift; sourceTree = "<group>"; };
@@ -43,13 +44,12 @@
 		ECC7DF1A22D4D6E200D583A1 /* ApodCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodCard.swift; sourceTree = "<group>"; };
 		ECC7DF1D22D4D80C00D583A1 /* ApodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodData.swift; sourceTree = "<group>"; };
 		ECC7DF1F22D4D8A800D583A1 /* RuntimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuntimeData.swift; sourceTree = "<group>"; };
-		ECC8282122D637A2001F38A3 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
+		ECC8282122D637A2001F38A3 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		ECC8282522D71A50001F38A3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		ECC8282722D78BC8001F38A3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ECC8282922D83AEF001F38A3 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
 		ECC8282B22D83BBF001F38A3 /* ApodCardList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodCardList.swift; sourceTree = "<group>"; };
 		ECE55E8222F6D5C000F8ABBE /* UserSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
-		ECFEBD5522E4C018008E0613 /* UserDefaults+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Helper.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,54 +63,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EC17C35724A4F91500BC9396 /* Shared */ = {
+		EC7D07902776327700A21643 /* Systems */ = {
 			isa = PBXGroup;
 			children = (
-				EC17C35524A4BE0100BC9396 /* ContentView.swift */,
-				ECB72ABD24AF6866000F551A /* Views */,
-				ECC7DF2522D4E51900D583A1 /* Components */,
-				EC17C35A24A4F96000BC9396 /* Setting */,
-				EC17C35824A4F92100BC9396 /* Today */,
-				EC17C35924A4F93700BC9396 /* Random */,
-				EC17C35B24A4F97500BC9396 /* Favorite */,
+				EC7D07912776329300A21643 /* Constants.swift */,
+				EC7D0793277633AB00A21643 /* ConfigField.swift */,
 			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		EC17C35824A4F92100BC9396 /* Today */ = {
-			isa = PBXGroup;
-			children = (
-				EC17C35224A49E6500BC9396 /* TodayView.swift */,
-			);
-			path = Today;
-			sourceTree = "<group>";
-		};
-		EC17C35924A4F93700BC9396 /* Random */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Random;
-			sourceTree = "<group>";
-		};
-		EC17C35A24A4F96000BC9396 /* Setting */ = {
-			isa = PBXGroup;
-			children = (
-				ECC8282522D71A50001F38A3 /* SettingView.swift */,
-			);
-			path = Setting;
-			sourceTree = "<group>";
-		};
-		EC17C35B24A4F97500BC9396 /* Favorite */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Favorite;
+			path = Systems;
 			sourceTree = "<group>";
 		};
 		ECB72ABD24AF6866000F551A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ECC8282522D71A50001F38A3 /* SettingView.swift */,
+				EC17C35524A4BE0100BC9396 /* ContentView.swift */,
 				ECB72ABE24AF6880000F551A /* ImageViewer.swift */,
+				EC17C35224A49E6500BC9396 /* TodayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -135,21 +103,23 @@
 			isa = PBXGroup;
 			children = (
 				ECC7DF0622D4D62B00D583A1 /* ApodApp.swift */,
-				EC17C35724A4F91500BC9396 /* Shared */,
+				ECB72ABD24AF6866000F551A /* Views */,
+				ECC7DF2522D4E51900D583A1 /* Components */,
+				EC7D07902776327700A21643 /* Systems */,
 				ECC7DF1C22D4D78A00D583A1 /* Models */,
-				ECC7DF0822D4D62F00D583A1 /* Assets.xcassets */,
-				ECC7DF1022D4D62F00D583A1 /* Info.plist */,
-				ECC7DF0A22D4D62F00D583A1 /* Preview Content */,
+				ECC7DF0A22D4D62F00D583A1 /* Resources */,
 			);
 			path = "Apod-SwiftUI";
 			sourceTree = "<group>";
 		};
-		ECC7DF0A22D4D62F00D583A1 /* Preview Content */ = {
+		ECC7DF0A22D4D62F00D583A1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				ECC7DF0822D4D62F00D583A1 /* Assets.xcassets */,
+				ECC7DF1022D4D62F00D583A1 /* Info.plist */,
 				ECC7DF0B22D4D62F00D583A1 /* Preview Assets.xcassets */,
 			);
-			path = "Preview Content";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		ECC7DF1C22D4D78A00D583A1 /* Models */ = {
@@ -158,7 +128,6 @@
 				ECC7DF1D22D4D80C00D583A1 /* ApodData.swift */,
 				EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */,
 				ECC7DF1F22D4D8A800D583A1 /* RuntimeData.swift */,
-				ECFEBD5522E4C018008E0613 /* UserDefaults+Helper.swift */,
 				ECE55E8222F6D5C000F8ABBE /* UserSetting.swift */,
 			);
 			path = Models;
@@ -167,12 +136,11 @@
 		ECC7DF2522D4E51900D583A1 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				EC77D1E522D5EF870095D3D4 /* AsyncImage.swift */,
-				ECC8282122D637A2001F38A3 /* ArticleView.swift */,
+				ECC8282122D637A2001F38A3 /* Article.swift */,
 				ECC8282722D78BC8001F38A3 /* WebView.swift */,
 				ECC7DF1A22D4D6E200D583A1 /* ApodCard.swift */,
 				ECC8282B22D83BBF001F38A3 /* ApodCardList.swift */,
-				EC17C36024A7665A00BC9396 /* ApodMediaView.swift */,
+				EC17C36024A7665A00BC9396 /* Media.swift */,
 				ECC8282922D83AEF001F38A3 /* Placeholder.swift */,
 			);
 			path = Components;
@@ -249,20 +217,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				ECB72ABF24AF6880000F551A /* ImageViewer.swift in Sources */,
-				ECFEBD5622E4C018008E0613 /* UserDefaults+Helper.swift in Sources */,
+				EC7D07922776329300A21643 /* Constants.swift in Sources */,
 				ECC7DF2022D4D8A800D583A1 /* RuntimeData.swift in Sources */,
-				EC77D1E622D5EF870095D3D4 /* AsyncImage.swift in Sources */,
 				EC17C35324A49E6500BC9396 /* TodayView.swift in Sources */,
 				EC77D1E422D5E7F70095D3D4 /* ApodRequest.swift in Sources */,
 				ECC7DF1B22D4D6E200D583A1 /* ApodCard.swift in Sources */,
 				EC17C35624A4BE0100BC9396 /* ContentView.swift in Sources */,
-				ECC8282222D637A2001F38A3 /* ArticleView.swift in Sources */,
+				ECC8282222D637A2001F38A3 /* Article.swift in Sources */,
 				ECC7DF0722D4D62B00D583A1 /* ApodApp.swift in Sources */,
 				ECC7DF1E22D4D80C00D583A1 /* ApodData.swift in Sources */,
 				ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */,
 				ECC8282C22D83BBF001F38A3 /* ApodCardList.swift in Sources */,
 				ECE55E8322F6D5C000F8ABBE /* UserSetting.swift in Sources */,
-				EC17C36124A7665B00BC9396 /* ApodMediaView.swift in Sources */,
+				EC7D0794277633AB00A21643 /* ConfigField.swift in Sources */,
+				EC17C36124A7665B00BC9396 /* Media.swift in Sources */,
 				ECC8282622D71A50001F38A3 /* SettingView.swift in Sources */,
 				ECC8282A22D83AEF001F38A3 /* Placeholder.swift in Sources */,
 			);
@@ -392,10 +360,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "Apod-SwiftUI/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "Apod-SwiftUI/Resources/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = 6MTC9ES4SK;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Apod-SwiftUI/Info.plist";
+				INFOPLIST_FILE = "Apod-SwiftUI/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -413,10 +381,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "Apod-SwiftUI/Preview\\ Content";
+				DEVELOPMENT_ASSET_PATHS = "Apod-SwiftUI/Resources/Preview\\ Assets.xcassets";
 				DEVELOPMENT_TEAM = 6MTC9ES4SK;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Apod-SwiftUI/Info.plist";
+				INFOPLIST_FILE = "Apod-SwiftUI/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -13,8 +13,6 @@ struct TodayView: View {
     
     @State fileprivate var apod: ApodData? = nil
     
-    @State var image: UIImage? = nil
-    
     @State var error: String? = nil
     
     var request: ApodRequest.Publisher = ApodRequest.today.request()
@@ -22,7 +20,7 @@ struct TodayView: View {
     var body: some View {
         VStack {
             if let apod = self.apod {
-                ArticleView(content: apod, image: $image)
+                Article(content: apod)
                     .edgesIgnoringSafeArea(.top)
             } else {
                 Placeholder(sfSymbol: "sunset", content: self.error)

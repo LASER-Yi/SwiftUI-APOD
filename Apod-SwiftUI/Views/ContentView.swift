@@ -19,9 +19,7 @@ struct ContentView: View {
     @State private var selection: Set<NavigationItem> = [.today]
     
     var body: some View {
-        NavigationView {
-            TodayView()
-        }
+        TodayView()
     }
 }
 

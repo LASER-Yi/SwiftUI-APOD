@@ -8,14 +8,12 @@
 
 import SwiftUI
 
-struct ArticleView : View {
+struct Article : View {
     
     var content: ApodData
     
-    @Binding var image: UIImage?
-    
     var mediaView: some View {
-        ApodMediaView(content: content, image: $image)
+        Media(content: content)
             .cornerRadius(8.0)
             .padding(.all, 12.0)
             .shadow(radius: 10)
@@ -68,9 +66,9 @@ struct ArticleView : View {
 struct ApodModal_Previews : PreviewProvider {
     static var previews: some View {
         Group {
-            ArticleView(content: debugApodList[1], image: .constant(nil))
+            Article(content: debugApodList[1])
             
-            ArticleView(content: debugApodList[2], image: .constant(nil))
+            Article(content: debugApodList[2])
                 .preferredColorScheme(.dark)
         }
     }

@@ -8,19 +8,22 @@
 
 import SwiftUI
 
-struct ApodMediaView: View {
+struct Media: View {
     
     var content: ApodData
-    
-    @Binding var image: UIImage?
     
     var body: some View {
         VStack {
             if content.mediaType == .image {
-                AsyncImage(url: content.getImageUrl()!, image: $image) {
+                AsyncImage(url: content.getImageUrl()) { image in
+                    image
+                        .resizable()
+                        .renderingMode(.original)
+                        .scaledToFit()
+                } placeholder: {
                     ProgressView()
                 }
-                    .scaledToFit()
+                .frame(width: .infinity, height: 200, alignment: .center)
             }else {
                 WebView(request: URLRequest(url: content.url!))
             }
@@ -32,7 +35,7 @@ struct ApodMediaView: View {
 struct ApodMediaView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            ApodMediaView(content: debugApodList[0], image: .constant(nil))
+            Media(content: debugApodList[0])
                 .previewLayout(.sizeThatFits)
         }
     }

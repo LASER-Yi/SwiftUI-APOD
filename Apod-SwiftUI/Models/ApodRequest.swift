@@ -19,7 +19,6 @@ struct ApodRequest {
         case Empty
     }
     
-    static private let url: URL = URL(string: "https://api.nasa.gov/planetary/apod")!
     
     // MARK: - Static
     static var today: ApodRequest {
@@ -89,7 +88,7 @@ struct ApodRequest {
     private var urlRequest: URLRequest {
         let header = self.form.map { URLQueryItem(name: $0, value: $1) }
         
-        var components = URLComponents(url: Self.url, resolvingAgainstBaseURL: false)
+        var components = URLComponents(url: Constants.NasaAPI, resolvingAgainstBaseURL: false)
         components?.queryItems = header
 
         guard let url = components?.url else { fatalError("request url wrong")}
