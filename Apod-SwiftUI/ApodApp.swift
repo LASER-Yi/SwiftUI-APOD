@@ -14,7 +14,7 @@ struct ApodApp : App {
     @SceneBuilder var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(RuntimeData.shared)
+                .environmentObject(RuntimeData())
         }
     }
 }

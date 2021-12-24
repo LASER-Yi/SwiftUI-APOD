@@ -42,7 +42,7 @@ struct ApodCardList_Previews : PreviewProvider {
     static var previews: some View {
         Group {
             ScrollView{
-                ApodCardList(models: debugApodList) {
+                ApodCardList(models: debugContent) {
                     Placeholder(sfSymbol: "bin.xmark.fill", content: nil)
                 }
             }

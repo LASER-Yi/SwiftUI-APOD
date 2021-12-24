@@ -38,7 +38,7 @@ struct ApodCard : View {
     var header: some View {
         VStack(alignment: .leading , spacing: 4) {
             
-            Text(apod.getFormatterDate())
+            Text(apod.formattedDate)
                 .font(.headline)
                 .foregroundColor(.primary)
                 .padding([.leading, .trailing], 8)
@@ -98,7 +98,7 @@ struct ApodBlockView_Previews : PreviewProvider {
     static var previews: some View {
         Group{
             ForEach(0..<4) { index in
-                ApodCard(apod: debugApodList[index])
+                ApodCard(apod: debugContent[index])
             }
         }
         .padding()

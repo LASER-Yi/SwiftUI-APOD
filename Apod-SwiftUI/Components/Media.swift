@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import ImageViewer
 
 struct Media: View {
     
@@ -15,7 +16,7 @@ struct Media: View {
     var body: some View {
         VStack {
             if content.mediaType == .image {
-                AsyncImage(url: content.getImageUrl()) { image in
+                AsyncImage(url: content.imageUrl) { image in
                     image
                         .resizable()
                         .renderingMode(.original)
@@ -24,6 +25,7 @@ struct Media: View {
                     ProgressView()
                 }
                 .frame(width: .infinity, height: 200, alignment: .center)
+
             }else {
                 WebView(request: URLRequest(url: content.url!))
             }
@@ -35,7 +37,7 @@ struct Media: View {
 struct ApodMediaView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            Media(content: debugApodList[0])
+            Media(content: debugContent[0])
                 .previewLayout(.sizeThatFits)
         }
     }

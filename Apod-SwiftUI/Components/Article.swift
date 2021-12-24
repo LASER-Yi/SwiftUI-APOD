@@ -27,7 +27,7 @@ struct Article : View {
                 .lineLimit(nil)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(content.getFormatterDate())
+            Text(content.formattedDate)
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding(.all, 8)
@@ -66,9 +66,9 @@ struct Article : View {
 struct ApodModal_Previews : PreviewProvider {
     static var previews: some View {
         Group {
-            Article(content: debugApodList[1])
+            Article(content: debugContent[1])
             
-            Article(content: debugApodList[2])
+            Article(content: debugContent[2])
                 .preferredColorScheme(.dark)
         }
     }

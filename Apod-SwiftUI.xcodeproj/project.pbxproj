@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,8 @@
 		EC77D1E422D5E7F70095D3D4 /* ApodRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */; };
 		EC7D07922776329300A21643 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D07912776329300A21643 /* Constants.swift */; };
 		EC7D0794277633AB00A21643 /* ConfigField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D0793277633AB00A21643 /* ConfigField.swift */; };
-		ECB72ABF24AF6880000F551A /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB72ABE24AF6880000F551A /* ImageViewer.swift */; };
+		EC7D07972776352700A21643 /* ImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = EC7D07962776352700A21643 /* ImageViewer */; };
+		EC7D07992776394000A21643 /* DebugContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D07982776394000A21643 /* DebugContent.swift */; };
 		ECC7DF0722D4D62B00D583A1 /* ApodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF0622D4D62B00D583A1 /* ApodApp.swift */; };
 		ECC7DF0922D4D62F00D583A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0822D4D62F00D583A1 /* Assets.xcassets */; };
 		ECC7DF0C22D4D62F00D583A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0B22D4D62F00D583A1 /* Preview Assets.xcassets */; };
@@ -35,7 +36,7 @@
 		EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodRequest.swift; sourceTree = "<group>"; };
 		EC7D07912776329300A21643 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EC7D0793277633AB00A21643 /* ConfigField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigField.swift; sourceTree = "<group>"; };
-		ECB72ABE24AF6880000F551A /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
+		EC7D07982776394000A21643 /* DebugContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugContent.swift; sourceTree = "<group>"; };
 		ECC7DEFF22D4D62B00D583A1 /* Apod-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apod-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECC7DF0622D4D62B00D583A1 /* ApodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodApp.swift; sourceTree = "<group>"; };
 		ECC7DF0822D4D62F00D583A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7D07972776352700A21643 /* ImageViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +70,7 @@
 			children = (
 				EC7D07912776329300A21643 /* Constants.swift */,
 				EC7D0793277633AB00A21643 /* ConfigField.swift */,
+				EC7D07982776394000A21643 /* DebugContent.swift */,
 			);
 			path = Systems;
 			sourceTree = "<group>";
@@ -77,7 +80,6 @@
 			children = (
 				ECC8282522D71A50001F38A3 /* SettingView.swift */,
 				EC17C35524A4BE0100BC9396 /* ContentView.swift */,
-				ECB72ABE24AF6880000F551A /* ImageViewer.swift */,
 				EC17C35224A49E6500BC9396 /* TodayView.swift */,
 			);
 			path = Views;
@@ -162,6 +164,9 @@
 			dependencies = (
 			);
 			name = "Apod-SwiftUI";
+			packageProductDependencies = (
+				EC7D07962776352700A21643 /* ImageViewer */,
+			);
 			productName = "Apod-SwiftUI";
 			productReference = ECC7DEFF22D4D62B00D583A1 /* Apod-SwiftUI.app */;
 			productType = "com.apple.product-type.application";
@@ -190,6 +195,9 @@
 				Base,
 			);
 			mainGroup = ECC7DEF622D4D62B00D583A1;
+			packageReferences = (
+				EC7D07952776352700A21643 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
+			);
 			productRefGroup = ECC7DF0022D4D62B00D583A1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -216,7 +224,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ECB72ABF24AF6880000F551A /* ImageViewer.swift in Sources */,
 				EC7D07922776329300A21643 /* Constants.swift in Sources */,
 				ECC7DF2022D4D8A800D583A1 /* RuntimeData.swift in Sources */,
 				EC17C35324A49E6500BC9396 /* TodayView.swift in Sources */,
@@ -225,6 +232,7 @@
 				EC17C35624A4BE0100BC9396 /* ContentView.swift in Sources */,
 				ECC8282222D637A2001F38A3 /* Article.swift in Sources */,
 				ECC7DF0722D4D62B00D583A1 /* ApodApp.swift in Sources */,
+				EC7D07992776394000A21643 /* DebugContent.swift in Sources */,
 				ECC7DF1E22D4D80C00D583A1 /* ApodData.swift in Sources */,
 				ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */,
 				ECC8282C22D83BBF001F38A3 /* ApodCardList.swift in Sources */,
@@ -419,6 +427,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EC7D07952776352700A21643 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Jake-Short/swiftui-image-viewer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EC7D07962776352700A21643 /* ImageViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EC7D07952776352700A21643 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = ImageViewer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ECC7DEF722D4D62B00D583A1 /* Project object */;
 }

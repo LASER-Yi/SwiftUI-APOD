@@ -13,13 +13,9 @@ import Combine
 
 final class RuntimeData: ObservableObject {
     
-    private init() {}
+    @Published var apods: [ApodData] = []
     
-    static let shared = RuntimeData()
-    
-    @Published var apods: [ApodRuntimeData] = []
-    
-    @Published var favoriteApods: Set<ApodRuntimeData> = .init()
+    @Published var favoriteApods: Set<ApodData> = .init()
     
 //    @Published var today: ApodRuntimeData
     
