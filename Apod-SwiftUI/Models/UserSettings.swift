@@ -9,11 +9,11 @@
 import Foundation
 import Combine
 
-final class UserSetting: ObservableObject {
+final class UserSettings: ObservableObject {
     
     private init() {}
     
-    static let shared = UserSetting()
+    static let shared = UserSettings()
     
     @ConfigField(key: "ApiKey", defaultVal: "DEMO_KEY") var apiKey: String
     

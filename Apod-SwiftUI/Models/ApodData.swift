@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-struct ApodData: Hashable, Codable,  Identifiable {
+struct ApodData: Hashable, Codable, Identifiable {
     var id: UUID = UUID()
     
     
@@ -99,7 +99,7 @@ struct ApodData: Hashable, Codable,  Identifiable {
     
     var imageUrl: URL? {
         get {
-            if UserSetting.shared.loadHdImage {
+            if UserSettings.shared.loadHdImage {
                 if self.hdurl != nil {
                     return self.hdurl
                 } else {

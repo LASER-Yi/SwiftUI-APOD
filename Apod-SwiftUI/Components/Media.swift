@@ -1,5 +1,5 @@
 //
-//  ApodMediaView.swift
+//  Media.swift
 //  Apod-SwiftUI
 //
 //  Created by LiangYi on 2020/6/27.
@@ -7,9 +7,10 @@
 //
 
 import SwiftUI
-import ImageViewer
 
 struct Media: View {
+    
+    @EnvironmentObject var runtime: RuntimeData
     
     var content: ApodData
     
@@ -20,7 +21,16 @@ struct Media: View {
                     image
                         .resizable()
                         .renderingMode(.original)
-                        .scaledToFit()
+                        .scaledToFill()
+                        .onAppear {
+                            runtime.previewingImage = image
+                        }
+                        .onDisappear {
+                            runtime.previewingImage = nil
+                        }
+                        .onTapGesture {
+                            runtime.isPreviewing = true
+                        }
                 } placeholder: {
                     ProgressView()
                 }
@@ -38,6 +48,7 @@ struct ApodMediaView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Media(content: debugContent[0])
+                .previewed()
                 .previewLayout(.sizeThatFits)
         }
     }

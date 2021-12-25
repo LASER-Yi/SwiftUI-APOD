@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SettingView : View {
     
-    @EnvironmentObject var setting: UserSetting
+    @EnvironmentObject var setting: UserSettings
     
     var apiEditor: some View {
         List {
@@ -74,7 +74,7 @@ struct SettingView : View {
 struct SettingView_Previews : PreviewProvider {
     static var previews: some View {
         SettingView()
-            .environmentObject(UserSetting.shared)
+            .environmentObject(UserSettings.shared)
     }
 }
 #endif

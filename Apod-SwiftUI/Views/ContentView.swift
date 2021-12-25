@@ -16,10 +16,14 @@ struct ContentView: View {
         case favorite = "Favorite"
     }
     
-    @State private var selection: Set<NavigationItem> = [.today]
-    
     var body: some View {
-        TodayView()
+        TabView {
+            TodayView()
+                .tabItem(systemName: "skew", text: "Today")
+            
+            RandomView()
+                .tabItem(systemName: "wand.and.stars", text: "Random")
+        }
     }
 }
 

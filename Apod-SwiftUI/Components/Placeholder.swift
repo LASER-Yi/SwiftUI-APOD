@@ -20,8 +20,8 @@ struct Placeholder : View {
                 .imageScale(.large)
                 .padding([.top, .bottom], 4)
             
-            if content != nil {
-                Text(content!)
+            if let content = content {
+                Text(content)
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity)
                     .lineLimit(nil)
@@ -37,6 +37,7 @@ struct Placeholder : View {
 struct Placeholder_Previews : PreviewProvider {
     static var previews: some View {
         Placeholder(sfSymbol: "cloud.bolt" , content: "You have exceeded your rate limit. Try again later or contact us at https://api.nasa.gov:443/contact/ for assistance")
+.previewInterfaceOrientation(.portraitUpsideDown)
     }
 }
 #endif

@@ -1,5 +1,5 @@
 //
-//  ApodBlockView.swift
+//  Card.swift
 //  Apod-SwiftUI
 //
 //  Created by LiangYi on 2019/7/9.
@@ -8,16 +8,9 @@
 
 import SwiftUI
 
-struct ApodCard : View {
+struct Card : View {
     
     @State var apod: ApodData
-    
-    enum DisplayMode {
-        case full
-        case compact
-    }
-    
-    var displayMode: DisplayMode = .full
     
     let aspect: CGFloat = 0.95
     
@@ -30,38 +23,26 @@ struct ApodCard : View {
     @State var isPresent: Bool = false
     
     var modal: some View {
-        let view = Article(content: apod)
-        
-        return view
+        Article(content: apod)
     }
+    
+    static let gradient = LinearGradient(gradient: .init(colors: [.init(white: 0.0, opacity: 0.75), .init(white: 0.0, opacity: 0.0)]), startPoint: .bottom, endPoint: .top)
     
     var header: some View {
         VStack(alignment: .leading , spacing: 4) {
-            
-            Text(apod.formattedDate)
-                .font(.headline)
-                .foregroundColor(.primary)
-                .padding([.leading, .trailing], 8)
-                .padding([.top, .bottom], 2)
-                .background(Color.secondary)
-                .cornerRadius(8)
+            Badge(content: apod.formattedDate)
                 
-            
-            
             Text(apod.title)
                 .font(.title)
                 .bold()
                 .lineLimit(nil)
                 .multilineTextAlignment(.leading)
-            
         }
         .colorScheme(.dark)
         .padding([.leading, .trailing, .bottom], 12)
         .padding(.top, 24)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(LinearGradient(gradient: .init(colors: [.init(white: 0.0, opacity: 0.75), .init(white: 0.0, opacity: 0.0)]),
-                                   startPoint: .bottom,
-                                   endPoint: .top))
+        .background(Self.gradient)
     }
     
     var body: some View {
@@ -77,7 +58,6 @@ struct ApodCard : View {
             }
         }
         .overlay(header, alignment: .bottomLeading)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .sheet(isPresented: $isPresent, content: {
             self.modal
         })
@@ -94,11 +74,11 @@ struct ApodCard : View {
 
 
 #if DEBUG
-struct ApodBlockView_Previews : PreviewProvider {
+struct Card_Previews : PreviewProvider {
     static var previews: some View {
         Group{
-            ForEach(0..<4) { index in
-                ApodCard(apod: debugContent[index])
+            ForEach(0..<2) { index in
+                Card(apod: debugContent[index])
             }
         }
         .padding()

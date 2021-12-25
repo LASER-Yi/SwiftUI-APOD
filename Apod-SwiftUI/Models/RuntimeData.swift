@@ -9,14 +9,13 @@
 import SwiftUI
 import Combine
 
-
-
 final class RuntimeData: ObservableObject {
     
-    @Published var apods: [ApodData] = []
+    var previewingImage: Image? = nil
     
-    @Published var favoriteApods: Set<ApodData> = .init()
+    var isPreviewing = false
     
-//    @Published var today: ApodRuntimeData
+    var today: TodayApod = .init()
     
+    var randoms: RandomApod = .init()
 }

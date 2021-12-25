@@ -9,34 +9,91 @@
 import Foundation
 import Combine
 
-struct ApodRequest {
+enum RequestError: Error {
+    case EmptyResult
+    case API(String)
+    case Unknown(String)
+}
+
+class TodayApod: LoadableObject {
+    @Published var state: Loadable<ApodData> = .notRequested
     
-    typealias Publisher = AnyPublisher<[ApodData], RequestError>
-    
-    enum RequestError: Error {
-        case UrlError(_ error: URLError)
-        case Other(_ str: String)
-        case Empty
-    }
-    
-    
-    // MARK: - Static
-    static var today: ApodRequest {
+    private var request: ApodRequest {
         var req = ApodRequest()
         req.date = .init()
         
         return req
     }
     
+    func load() {
+        let last = state.value
+        
+        let cancelable = request.run()
+            .print()
+            .map { data in
+                if let first = data.first {
+                    return Result.loaded(first)
+                } else {
+                    return Result.failed(last: last, RequestError.EmptyResult)
+                }
+            }
+            .catch { error in
+                Just(Result.failed(last: last, RequestError.Unknown(error.localizedDescription)))
+            }
+            .sink { [weak self] state in
+                DispatchQueue.main.sync {
+                    self?.state = state
+                }
+            }
+        
+        state = .isLoading(last: last, cancelable)
+    }
+}
+
+class RandomApod: LoadableObject {
+    @Published var state: Loadable<[ApodData]> = .notRequested
+    
+    private var request: ApodRequest {
+        var req = ApodRequest()
+        req.count = 10
+        
+        return req
+    }
+    
+    func load() {
+        let last = state.value
+        
+        let cancelable = request.run()
+            .print()
+            .map { data in
+                return Result.loaded(data)
+            }
+            .catch { error in
+                Just(Result.failed(last: last, RequestError.Unknown(error.localizedDescription)))
+            }
+            .sink { [weak self] state in
+                DispatchQueue.main.sync {
+                    self?.state = state
+                }
+            }
+        
+        state = .isLoading(last: last, cancelable)
+    }
+}
+
+struct ApodRequest {
+    
+    typealias Publisher = AnyPublisher<[ApodData], Error>
+
     // MARK: - API
     var date: Date?
     var concept_tags: Bool? // turn off
-    private var hd: Bool = UserSetting.shared.loadHdImage
+    private var hd: Bool = UserSettings.shared.loadHdImage
     var count: Int?
     var start_date: Date?
     var end_date: Date?
     var thumbs: Bool?
-    private var api_key: String = UserSetting.shared.apiKey
+    private var api_key: String = UserSettings.shared.apiKey
     
     private enum ReflectionKey: String {
         case date
@@ -99,11 +156,8 @@ struct ApodRequest {
         return request
     }
     
-    func request() -> Publisher {
+    func run() -> Publisher {
         let task = URLSession.shared.dataTaskPublisher(for: urlRequest)
-            .mapError({ (error) -> RequestError in
-                RequestError.UrlError(error)
-            })
             .tryMap({ (data, response) -> [ApodData] in
                 var results: [ApodData] = []
                 let decoder = JSONDecoder()
@@ -113,19 +167,15 @@ struct ApodRequest {
                 }else if let single = try? decoder.decode(ApodData.self, from: data) {
                     results.append(single)
                 }else if let error = try? decoder.decode(ApodData.ApodError.self, from: data){
-                    throw RequestError.Other(error.msg)
+                    throw RequestError.API(error.msg)
                 }else if let error = try? decoder.decode([String: ApodData.ApodError].self, from: data) {
-                    throw RequestError.Other(error.first!.value.msg)
+                    throw RequestError.API(error.first?.value.msg ?? "Unknown error")
                 }else {
-                    throw RequestError.Other("Unknown Error")
+                    throw RequestError.Unknown("Cannot parse results")
                 }
                 
                 return results
             })
-            .mapError({ error in
-                error as! RequestError
-            })
-            
         
         return task.eraseToAnyPublisher()
     }

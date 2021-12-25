@@ -11,20 +11,11 @@ import Combine
 
 struct TodayView: View {
     
-    @State fileprivate var apod: ApodData? = nil
-    
-    @State var error: String? = nil
-    
-    var request: ApodRequest.Publisher = ApodRequest.today.request()
+    @EnvironmentObject var runtime: RuntimeData
     
     var body: some View {
-        VStack {
-            if let apod = self.apod {
-                Article(content: apod)
-                    .edgesIgnoringSafeArea(.top)
-            } else {
-                Placeholder(sfSymbol: "sunset", content: self.error)
-            }
+        LoadableContent(source: runtime.today) { data in
+            Article(content: data)
         }
     }
 }
@@ -33,6 +24,7 @@ struct TodayView: View {
 struct TodayView_Previews: PreviewProvider {
     static var previews: some View {
         TodayView()
+            .previewed()
     }
 }
 #endif
