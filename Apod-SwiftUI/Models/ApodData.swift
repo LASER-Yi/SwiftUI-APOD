@@ -99,12 +99,8 @@ struct ApodData: Hashable, Codable, Identifiable {
     
     var imageUrl: URL? {
         get {
-            if UserSettings.shared.loadHdImage {
-                if self.hdurl != nil {
-                    return self.hdurl
-                } else {
-                    return self.url
-                }
+            if UserSettings.shared.loadHdImage, let hd = hdurl {
+                return hd
             } else {
                 return self.url
             }

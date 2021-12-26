@@ -26,6 +26,7 @@ class TodayApod: LoadableObject {
     }
     
     func load() {
+        cancel()
         let last = state.value
         
         let cancelable = request.run()
@@ -52,6 +53,11 @@ class TodayApod: LoadableObject {
 class RandomApod: LoadableObject {
     @Published var state: Loadable<[ApodData]> = .notRequested
     
+    enum LoadType {
+        case Append
+        case Refresh
+    }
+    
     let count = 10
     
     private var request: ApodRequest {
@@ -62,13 +68,27 @@ class RandomApod: LoadableObject {
     }
     
     func load() {
+        loadInternal()
+    }
+    
+    func reload() {
+        loadInternal(with: .Refresh)
+    }
+    
+    private func loadInternal(with loadType: LoadType = .Append) {
+        cancel()
         let last = state.value
         
         let cancelable = request.run()
             .map { data in
-                var newValue = last ?? []
-                newValue.append(contentsOf: data)
-                return Result.loaded(newValue)
+                if loadType == .Append {
+                    var newValue = last ?? []
+                    newValue.append(contentsOf: data)
+                    return Result.loaded(newValue)
+                } else {
+                    return Result.loaded(data)
+                }
+                
             }
             .catch { error in
                 Just(Result.failed(last: last, RequestError.Unknown(error.localizedDescription)))
@@ -86,15 +106,15 @@ class RandomApod: LoadableObject {
 struct ApodRequest {
     
     typealias Publisher = AnyPublisher<[ApodData], Error>
-
+    
     // MARK: - API
     var date: Date?
     var concept_tags: Bool? // turn off
-    private var hd: Bool = UserSettings.shared.loadHdImage
     var count: Int?
     var start_date: Date?
     var end_date: Date?
     var thumbs: Bool?
+    private var hd: Bool = UserSettings.shared.loadHdImage
     private var api_key: String = UserSettings.shared.apiKey
     
     private enum ReflectionKey: String {
@@ -149,9 +169,9 @@ struct ApodRequest {
         
         var components = URLComponents(url: Constants.NasaAPI, resolvingAgainstBaseURL: false)
         components?.queryItems = header
-
+        
         guard let url = components?.url else { fatalError("request url wrong")}
-
+        
         var request = URLRequest(url: url);
         request.httpMethod = "GET"
         

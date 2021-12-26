@@ -65,7 +65,7 @@ struct SettingView : View {
                     
                 }
             }
-            .navigationBarTitle(Text("Settings"), displayMode: .inline)
+            .navigationBarTitle(Text("Settings"))
         }
     }
 }
@@ -74,7 +74,7 @@ struct SettingView : View {
 struct SettingView_Previews : PreviewProvider {
     static var previews: some View {
         SettingView()
-            .environmentObject(UserSettings.shared)
+            .previewed()
     }
 }
 #endif

@@ -16,17 +16,3 @@ let data = asset.data
 
 let debugContent = try! JSONDecoder().decode(Array<ApodData>.self, from: data)
 #endif
-
-
-struct PreviewModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .environmentObject(RuntimeData())
-    }
-}
-
-extension View {
-    func previewed() -> some View {
-        modifier(PreviewModifier())
-    }
-}

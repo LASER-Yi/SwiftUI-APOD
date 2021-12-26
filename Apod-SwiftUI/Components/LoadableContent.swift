@@ -39,14 +39,15 @@ struct LoadableContent<Source: LoadableObject, Content: View>: View {
         VStack {
             switch source.state {
             case .notRequested:
-                ProgressView("Loading")
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
                     .onAppear(perform: source.load)
             case let .isLoading(last: last, _):
                 if let data = last {
                     content(data)
                         .environment(\.loading, true)
                 } else {
-                    Text("Loading")
+                    ProgressView("Loading")
                 }
             case .loaded(let data):
                 content(data)
@@ -59,10 +60,34 @@ struct LoadableContent<Source: LoadableObject, Content: View>: View {
     }
 }
 
+
+
 struct LoadableContent_Previews: PreviewProvider {
-    static var previews: some View {
-        LoadableContent(source: TodayApod()) { item in
-            Text(item.formattedDate)
+    
+    class PreviewObject: LoadableObject {
+        var state: Loadable<Bool>
+        
+        init(_ state: Loadable<Bool>) {
+            self.state = state
         }
+        
+        func load() { }
+    }
+    
+    static var previews: some View {
+        Group {
+            LoadableContent(source: PreviewObject(.notRequested)) { item in
+                Text("Content")
+            }
+            
+            LoadableContent(source: PreviewObject(.loaded(false))) { item in
+                Text("Content")
+            }
+            
+            LoadableContent(source: PreviewObject(.failed(last: false, URLError(.cannotFindHost)))) { item in
+                Text("Content")
+            }
+        }
+        .previewLayout(.sizeThatFits)
     }
 }

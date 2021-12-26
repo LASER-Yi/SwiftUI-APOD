@@ -13,7 +13,7 @@ import Combine
 enum Loadable<T> {
     
     case notRequested
-    case isLoading(last: T?, AnyCancellable)
+    case isLoading(last: T?, AnyCancellable?)
     case loaded(T)
     case failed(last: T?, Error)
     
@@ -39,14 +39,13 @@ protocol LoadableObject: ObservableObject {
     var state: Result { get set }
     
     func load()
-    func cancel()
 }
 
 extension LoadableObject {
     func cancel() {
         switch state {
         case .isLoading(last: _, let cancelable):
-            cancelable.cancel()
+            cancelable?.cancel()
         default:
             break
         }

@@ -19,6 +19,7 @@ struct RandomView: View {
                     LazyVStack {
                         ForEach(data) { item in
                             Card(apod: item)
+                                .padding([.vertical], 12)
                         }
                     }
                 }
