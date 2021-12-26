@@ -7,14 +7,11 @@
 //
 
 import SwiftUI
+import ImageViewer
 
 struct ContentView: View {
-    
-    enum NavigationItem: String, CaseIterable {
-        case today = "Today"
-        case random = "Random"
-        case favorite = "Favorite"
-    }
+
+    @EnvironmentObject var runtime: RuntimeData
     
     var body: some View {
         TabView {
@@ -23,6 +20,9 @@ struct ContentView: View {
             
             RandomView()
                 .tabItem(systemName: "wand.and.stars", text: "Random")
+            
+            SettingView()
+                .tabItem(systemName: "gear", text: "Settings")
         }
     }
 }
@@ -30,5 +30,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewed()
     }
 }

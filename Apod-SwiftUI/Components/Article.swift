@@ -27,12 +27,7 @@ struct Article : View {
                 .lineLimit(nil)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Text(content.formattedDate)
-                .font(.headline)
-                .foregroundColor(.white)
-                .padding(.all, 8)
-                .background(Color.accentColor)
-                .cornerRadius(8.0)
+            Badge(content: content.formattedDate)
             
             Divider()
             

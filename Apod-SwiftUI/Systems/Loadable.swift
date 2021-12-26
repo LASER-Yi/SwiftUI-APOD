@@ -36,9 +36,10 @@ protocol LoadableObject: ObservableObject {
     associatedtype Output
     typealias Result = Loadable<Output>
     
-    var state: Result { get }
+    var state: Result { get set }
     
     func load()
+    func cancel()
 }
 
 extension LoadableObject {
@@ -47,7 +48,13 @@ extension LoadableObject {
         case .isLoading(last: _, let cancelable):
             cancelable.cancel()
         default:
-            return
+            break
+        }
+        
+        if let value = state.value {
+            state = .loaded(value)
+        } else {
+            state = .notRequested
         }
     }
 }

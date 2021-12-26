@@ -11,9 +11,9 @@ import Combine
 
 final class RuntimeData: ObservableObject {
     
-    var previewingImage: Image? = nil
+    @Published var previewingImage: Image? = nil
     
-    var isPreviewing = false
+    @Published var isPreviewing = false
     
     var today: TodayApod = .init()
     

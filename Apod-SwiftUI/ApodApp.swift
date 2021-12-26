@@ -15,6 +15,7 @@ struct ApodApp : App {
         WindowGroup {
             ContentView()
                 .environmentObject(RuntimeData())
+                .environmentObject(UserSettings.shared)
         }
     }
 }

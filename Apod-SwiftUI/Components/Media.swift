@@ -34,7 +34,7 @@ struct Media: View {
                 } placeholder: {
                     ProgressView()
                 }
-                .frame(width: .infinity, height: 200, alignment: .center)
+                .frame(height: 200, alignment: .center)
 
             }else {
                 WebView(request: URLRequest(url: content.url!))

@@ -30,7 +30,6 @@
 		ECC8282622D71A50001F38A3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282522D71A50001F38A3 /* SettingView.swift */; };
 		ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282722D78BC8001F38A3 /* WebView.swift */; };
 		ECC8282A22D83AEF001F38A3 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282922D83AEF001F38A3 /* Placeholder.swift */; };
-		ECC8282C22D83BBF001F38A3 /* PlaceholderList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282B22D83BBF001F38A3 /* PlaceholderList.swift */; };
 		ECE55E8322F6D5C000F8ABBE /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE55E8222F6D5C000F8ABBE /* UserSettings.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +58,6 @@
 		ECC8282522D71A50001F38A3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		ECC8282722D78BC8001F38A3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		ECC8282922D83AEF001F38A3 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
-		ECC8282B22D83BBF001F38A3 /* PlaceholderList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderList.swift; sourceTree = "<group>"; };
 		ECE55E8222F6D5C000F8ABBE /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,7 +151,6 @@
 				ECC8282122D637A2001F38A3 /* Article.swift */,
 				ECC8282722D78BC8001F38A3 /* WebView.swift */,
 				ECC7DF1A22D4D6E200D583A1 /* Card.swift */,
-				ECC8282B22D83BBF001F38A3 /* PlaceholderList.swift */,
 				EC17C36024A7665A00BC9396 /* Media.swift */,
 				ECC8282922D83AEF001F38A3 /* Placeholder.swift */,
 				EC1F208D2777793900BA878F /* TabItemModifier.swift */,
@@ -254,7 +251,6 @@
 				EC7D07992776394000A21643 /* DebugContent.swift in Sources */,
 				ECC7DF1E22D4D80C00D583A1 /* ApodData.swift in Sources */,
 				ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */,
-				ECC8282C22D83BBF001F38A3 /* PlaceholderList.swift in Sources */,
 				ECE55E8322F6D5C000F8ABBE /* UserSettings.swift in Sources */,
 				EC7D0794277633AB00A21643 /* ConfigField.swift in Sources */,
 				EC17C36124A7665B00BC9396 /* Media.swift in Sources */,

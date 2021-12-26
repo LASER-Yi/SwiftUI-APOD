@@ -8,6 +8,23 @@
 
 import SwiftUI
 
+struct LoadingKey: EnvironmentKey {
+    static var defaultValue: Bool {
+        false
+    }
+}
+
+extension EnvironmentValues {
+    var loading: Bool {
+        get {
+            self[LoadingKey.self]
+        }
+        set {
+            self[LoadingKey.self] = newValue
+        }
+    }
+}
+
 struct LoadableContent<Source: LoadableObject, Content: View>: View {
     
     @ObservedObject var source: Source
@@ -24,8 +41,13 @@ struct LoadableContent<Source: LoadableObject, Content: View>: View {
             case .notRequested:
                 ProgressView("Loading")
                     .onAppear(perform: source.load)
-            case .isLoading(last: _):
-                Text("Loading")
+            case let .isLoading(last: last, _):
+                if let data = last {
+                    content(data)
+                        .environment(\.loading, true)
+                } else {
+                    Text("Loading")
+                }
             case .loaded(let data):
                 content(data)
             case .failed(_, let err):
@@ -33,7 +55,7 @@ struct LoadableContent<Source: LoadableObject, Content: View>: View {
             }
         }
         .onDisappear(perform: source.cancel)
-
+        
     }
 }
 

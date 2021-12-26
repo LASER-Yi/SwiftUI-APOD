@@ -13,12 +13,17 @@ struct RandomView: View {
     @EnvironmentObject var runtime: RuntimeData
     
     var body: some View {
-        LoadableContent(source: runtime.randoms) { data in
-            List {
-                ForEach(data) { apod in
-                    Card(apod: apod)
+        NavigationView {
+            LoadableContent(source: runtime.randoms) { data in
+                ScrollView {
+                    LazyVStack {
+                        ForEach(data) { item in
+                            Card(apod: item)
+                        }
+                    }
                 }
             }
+            .navigationTitle(Text("Random"))
         }
     }
 }

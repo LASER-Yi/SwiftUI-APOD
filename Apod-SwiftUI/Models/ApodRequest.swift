@@ -29,7 +29,6 @@ class TodayApod: LoadableObject {
         let last = state.value
         
         let cancelable = request.run()
-            .print()
             .map { data in
                 if let first = data.first {
                     return Result.loaded(first)
@@ -53,9 +52,11 @@ class TodayApod: LoadableObject {
 class RandomApod: LoadableObject {
     @Published var state: Loadable<[ApodData]> = .notRequested
     
+    let count = 10
+    
     private var request: ApodRequest {
         var req = ApodRequest()
-        req.count = 10
+        req.count = count
         
         return req
     }
@@ -64,9 +65,10 @@ class RandomApod: LoadableObject {
         let last = state.value
         
         let cancelable = request.run()
-            .print()
             .map { data in
-                return Result.loaded(data)
+                var newValue = last ?? []
+                newValue.append(contentsOf: data)
+                return Result.loaded(newValue)
             }
             .catch { error in
                 Just(Result.failed(last: last, RequestError.Unknown(error.localizedDescription)))
@@ -108,7 +110,7 @@ struct ApodRequest {
     
     private var formatter: DateFormatter {
         let df = DateFormatter()
-        df.dateFormat = "YYYY-MM-dd"
+        df.dateFormat = "yyyy-MM-dd"
         return df
     }
     
