@@ -16,11 +16,10 @@
 		EC1F209427778C7E00BA878F /* LoadableContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1F209327778C7E00BA878F /* LoadableContent.swift */; };
 		EC357DFD2777AA7900FAE2F2 /* RandomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC357DFC2777AA7900FAE2F2 /* RandomView.swift */; };
 		EC357DFF27788BA800FAE2F2 /* SwiftUI+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC357DFE27788BA800FAE2F2 /* SwiftUI+Helper.swift */; };
+		EC357E032779BB5F00FAE2F2 /* FancyScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = EC357E022779BB5F00FAE2F2 /* FancyScrollView */; };
 		EC77D1E422D5E7F70095D3D4 /* ApodRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */; };
 		EC7D07922776329300A21643 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D07912776329300A21643 /* Constants.swift */; };
-		EC7D0794277633AB00A21643 /* ConfigField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D0793277633AB00A21643 /* ConfigField.swift */; };
-		EC7D07972776352700A21643 /* ImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = EC7D07962776352700A21643 /* ImageViewer */; };
-		EC7D07992776394000A21643 /* DebugContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D07982776394000A21643 /* DebugContent.swift */; };
+		EC7D07992776394000A21643 /* PreviewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7D07982776394000A21643 /* PreviewContent.swift */; };
 		ECC7DF0722D4D62B00D583A1 /* ApodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC7DF0622D4D62B00D583A1 /* ApodApp.swift */; };
 		ECC7DF0922D4D62F00D583A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0822D4D62F00D583A1 /* Assets.xcassets */; };
 		ECC7DF0C22D4D62F00D583A1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC7DF0B22D4D62F00D583A1 /* Preview Assets.xcassets */; };
@@ -30,7 +29,7 @@
 		ECC8282222D637A2001F38A3 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282122D637A2001F38A3 /* Article.swift */; };
 		ECC8282622D71A50001F38A3 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282522D71A50001F38A3 /* SettingView.swift */; };
 		ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282722D78BC8001F38A3 /* WebView.swift */; };
-		ECC8282A22D83AEF001F38A3 /* Placeholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282922D83AEF001F38A3 /* Placeholder.swift */; };
+		ECC8282A22D83AEF001F38A3 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC8282922D83AEF001F38A3 /* ErrorView.swift */; };
 		ECE55E8322F6D5C000F8ABBE /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE55E8222F6D5C000F8ABBE /* UserSettings.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +45,7 @@
 		EC357DFE27788BA800FAE2F2 /* SwiftUI+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Helper.swift"; sourceTree = "<group>"; };
 		EC77D1E322D5E7F60095D3D4 /* ApodRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodRequest.swift; sourceTree = "<group>"; };
 		EC7D07912776329300A21643 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		EC7D0793277633AB00A21643 /* ConfigField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigField.swift; sourceTree = "<group>"; };
-		EC7D07982776394000A21643 /* DebugContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugContent.swift; sourceTree = "<group>"; };
+		EC7D07982776394000A21643 /* PreviewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContent.swift; sourceTree = "<group>"; };
 		ECC7DEFF22D4D62B00D583A1 /* Apod-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Apod-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECC7DF0622D4D62B00D583A1 /* ApodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodApp.swift; sourceTree = "<group>"; };
 		ECC7DF0822D4D62F00D583A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,7 +57,7 @@
 		ECC8282122D637A2001F38A3 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		ECC8282522D71A50001F38A3 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		ECC8282722D78BC8001F38A3 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		ECC8282922D83AEF001F38A3 /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
+		ECC8282922D83AEF001F38A3 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		ECE55E8222F6D5C000F8ABBE /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EC7D07972776352700A21643 /* ImageViewer in Frameworks */,
+				EC357E032779BB5F00FAE2F2 /* FancyScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +76,8 @@
 		EC357E0027789F2F00FAE2F2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				EC7D07982776394000A21643 /* DebugContent.swift */,
+				EC1F208D2777793900BA878F /* TabItemModifier.swift */,
+				EC7D07982776394000A21643 /* PreviewContent.swift */,
 				EC357DFE27788BA800FAE2F2 /* SwiftUI+Helper.swift */,
 			);
 			path = Utilities;
@@ -88,7 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				EC7D07912776329300A21643 /* Constants.swift */,
-				EC7D0793277633AB00A21643 /* ConfigField.swift */,
 				EC1F20912777840B00BA878F /* Loadable.swift */,
 			);
 			path = Systems;
@@ -163,8 +161,7 @@
 				ECC8282722D78BC8001F38A3 /* WebView.swift */,
 				ECC7DF1A22D4D6E200D583A1 /* Card.swift */,
 				EC17C36024A7665A00BC9396 /* Media.swift */,
-				ECC8282922D83AEF001F38A3 /* Placeholder.swift */,
-				EC1F208D2777793900BA878F /* TabItemModifier.swift */,
+				ECC8282922D83AEF001F38A3 /* ErrorView.swift */,
 				EC1F208F27777FEC00BA878F /* Badge.swift */,
 				EC1F209327778C7E00BA878F /* LoadableContent.swift */,
 			);
@@ -188,7 +185,7 @@
 			);
 			name = "Apod-SwiftUI";
 			packageProductDependencies = (
-				EC7D07962776352700A21643 /* ImageViewer */,
+				EC357E022779BB5F00FAE2F2 /* FancyScrollView */,
 			);
 			productName = "Apod-SwiftUI";
 			productReference = ECC7DEFF22D4D62B00D583A1 /* Apod-SwiftUI.app */;
@@ -219,7 +216,7 @@
 			);
 			mainGroup = ECC7DEF622D4D62B00D583A1;
 			packageReferences = (
-				EC7D07952776352700A21643 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
+				EC357E012779BB5F00FAE2F2 /* XCRemoteSwiftPackageReference "FancyScrollView" */,
 			);
 			productRefGroup = ECC7DF0022D4D62B00D583A1 /* Products */;
 			projectDirPath = "";
@@ -259,15 +256,14 @@
 				ECC7DF0722D4D62B00D583A1 /* ApodApp.swift in Sources */,
 				EC1F20922777840B00BA878F /* Loadable.swift in Sources */,
 				EC357DFD2777AA7900FAE2F2 /* RandomView.swift in Sources */,
-				EC7D07992776394000A21643 /* DebugContent.swift in Sources */,
+				EC7D07992776394000A21643 /* PreviewContent.swift in Sources */,
 				ECC7DF1E22D4D80C00D583A1 /* ApodData.swift in Sources */,
 				ECC8282822D78BC8001F38A3 /* WebView.swift in Sources */,
 				EC357DFF27788BA800FAE2F2 /* SwiftUI+Helper.swift in Sources */,
 				ECE55E8322F6D5C000F8ABBE /* UserSettings.swift in Sources */,
-				EC7D0794277633AB00A21643 /* ConfigField.swift in Sources */,
 				EC17C36124A7665B00BC9396 /* Media.swift in Sources */,
 				ECC8282622D71A50001F38A3 /* SettingView.swift in Sources */,
-				ECC8282A22D83AEF001F38A3 /* Placeholder.swift in Sources */,
+				ECC8282A22D83AEF001F38A3 /* ErrorView.swift in Sources */,
 				EC1F209027777FEC00BA878F /* Badge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,21 +453,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		EC7D07952776352700A21643 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+		EC357E012779BB5F00FAE2F2 /* XCRemoteSwiftPackageReference "FancyScrollView" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Jake-Short/swiftui-image-viewer.git";
+			repositoryURL = "https://github.com/nerdsupremacist/FancyScrollView";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 0.1.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EC7D07962776352700A21643 /* ImageViewer */ = {
+		EC357E022779BB5F00FAE2F2 /* FancyScrollView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = EC7D07952776352700A21643 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
-			productName = ImageViewer;
+			package = EC357E012779BB5F00FAE2F2 /* XCRemoteSwiftPackageReference "FancyScrollView" */;
+			productName = FancyScrollView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

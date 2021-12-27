@@ -12,6 +12,10 @@ struct Badge: View {
     
     let content: String
     
+    init(_ content: String) {
+        self.content = content
+    }
+    
     var body: some View {
         Text(content)
             .font(.headline)
@@ -25,7 +29,7 @@ struct Badge: View {
 
 struct Badge_Previews: PreviewProvider {
     static var previews: some View {
-        Badge(content: "2021-10-31")
+        Badge("2021-10-31")
             .padding()
             .previewLayout(.sizeThatFits)
     }

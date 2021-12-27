@@ -35,28 +35,29 @@ struct LoadableContent<Source: LoadableObject, Content: View>: View {
         self.content = content
     }
     
+    
     var body: some View {
-        VStack {
-            switch source.state {
-            case .notRequested:
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .onAppear(perform: source.load)
-            case let .isLoading(last: last, _):
+        switch source.state {
+        case .notRequested:
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
+                .onAppear(perform: source.load)
+        case let .isLoading(last: last, _):
+            VStack {
                 if let data = last {
                     content(data)
                         .environment(\.loading, true)
                 } else {
                     ProgressView("Loading")
                 }
-            case .loaded(let data):
-                content(data)
-            case .failed(_, let err):
-                Placeholder(sfSymbol: "sunset", content: err.localizedDescription)
             }
+            .onDisappear(perform: source.cancel)
+            
+        case .loaded(let data):
+            content(data)
+        case .failed(_, let err):
+            ErrorView(err)
         }
-        .onDisappear(perform: source.cancel)
-        
     }
 }
 
@@ -77,6 +78,10 @@ struct LoadableContent_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             LoadableContent(source: PreviewObject(.notRequested)) { item in
+                Text("Content")
+            }
+            
+            LoadableContent(source: PreviewObject(.isLoading(last: nil, nil))) { item in
                 Text("Content")
             }
             

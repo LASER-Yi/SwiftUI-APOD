@@ -10,16 +10,18 @@ import SwiftUI
 import ImageViewer
 
 struct ContentView: View {
-
+    
     @EnvironmentObject var runtime: RuntimeData
     
+    @State var selection = "Today"
+    
     var body: some View {
-        TabView {
+        TabView(selection: self.$selection) {
+            RandomView()
+                .tabItem(systemName: "sparkles.rectangle.stack", text: "Gallery")
+            
             TodayView()
                 .tabItem(systemName: "skew", text: "Today")
-            
-            RandomView()
-                .tabItem(systemName: "wand.and.stars", text: "Random")
             
             SettingView()
                 .tabItem(systemName: "gear", text: "Settings")

@@ -22,15 +22,6 @@ struct Media: View {
                         .resizable()
                         .renderingMode(.original)
                         .scaledToFill()
-                        .onAppear {
-                            runtime.previewingImage = image
-                        }
-                        .onDisappear {
-                            runtime.previewingImage = nil
-                        }
-                        .onTapGesture {
-                            runtime.isPreviewing = true
-                        }
                 } placeholder: {
                     ProgressView()
                 }
@@ -41,6 +32,7 @@ struct Media: View {
             }
         }
         .frame(maxWidth: .infinity)
+        .clipped()
     }
 }
 

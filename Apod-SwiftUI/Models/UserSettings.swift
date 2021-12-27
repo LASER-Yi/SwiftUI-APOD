@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 final class UserSettings: ObservableObject {
     
@@ -15,7 +16,7 @@ final class UserSettings: ObservableObject {
     
     static let shared = UserSettings()
     
-    @ConfigField(key: "ApiKey", defaultVal: "DEMO_KEY") var apiKey: String
+    @AppStorage("ApiKey") var apiKey: String = "DEMO_KEY"
     
-    @ConfigField(key: "AutoHdImage", defaultVal: true) var loadHdImage: Bool
+    @AppStorage("AutoHdImage") var loadHdImage = true
 }

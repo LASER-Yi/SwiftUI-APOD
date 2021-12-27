@@ -14,9 +14,6 @@ struct Article : View {
     
     var mediaView: some View {
         Media(content: content)
-            .cornerRadius(8.0)
-            .padding(.all, 12.0)
-            .shadow(radius: 10)
     }
     
     var article: some View {
@@ -27,7 +24,7 @@ struct Article : View {
                 .lineLimit(nil)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            Badge(content: content.formattedDate)
+            Badge(content.formattedDate)
             
             Divider()
             

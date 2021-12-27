@@ -30,7 +30,7 @@ struct Card : View {
     
     var header: some View {
         VStack(alignment: .leading , spacing: 4) {
-            Badge(content: apod.formattedDate)
+            Badge(apod.formattedDate)
                 
             Text(apod.title)
                 .font(.title)

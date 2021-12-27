@@ -1,5 +1,5 @@
 //
-//  DebugContent.swift
+//  PreviewContent.swift
 //  Apod-SwiftUI
 //
 //  Created by LiangYi on 2021/12/25.

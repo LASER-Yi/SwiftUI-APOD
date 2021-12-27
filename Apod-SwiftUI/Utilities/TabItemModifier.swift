@@ -10,29 +10,28 @@ import SwiftUI
 
 struct TabItemModifier: ViewModifier {
     
-    let image: Image
-    let text: String
+    let systemName: String
+    let label: String
     
-    init(systemName: String, text: String) {
-        self.image = Image(systemName: systemName)
-        self.text = text
+    init(systemName: String, label: String) {
+        self.systemName = systemName
+        self.label = label
     }
     
     func body(content: Content) -> some View {
         content
             .tabItem {
                 VStack {
-                    image
-                    Text(text)
+                    Image(systemName: systemName)
+                    Text(label)
                 }
             }
-            .tag(text)
+            .tag(label)
     }
 }
 
 extension View {
     func tabItem(systemName: String, text: String) -> some View {
-        modifier(TabItemModifier(systemName: systemName, text: text))
+        modifier(TabItemModifier(systemName: systemName, label: text))
     }
-
 }
