@@ -26,7 +26,6 @@ class TodayApod: LoadableObject {
     }
     
     func load() {
-        cancel()
         let last = state.value
         
         let cancelable = request.run()
@@ -50,7 +49,7 @@ class TodayApod: LoadableObject {
     }
 }
 
-class RandomApod: LoadableObject {
+class ApodList: LoadableObject {
     @Published var state: Loadable<[ApodData]> = .notRequested
     
     enum LoadType {
@@ -58,13 +57,8 @@ class RandomApod: LoadableObject {
         case Refresh
     }
     
-    let count = 10
-    
-    private var request: ApodRequest {
-        var req = ApodRequest()
-        req.count = count
-        
-        return req
+    func makeRequest() -> ApodRequest {
+        preconditionFailure("this method must be overrided")
     }
     
     func load() {
@@ -76,8 +70,9 @@ class RandomApod: LoadableObject {
     }
     
     private func loadInternal(with loadType: LoadType = .Append) {
-        cancel()
         let last = state.value
+        
+        let request = makeRequest()
         
         let cancelable = request.run()
             .map { data in
@@ -100,6 +95,37 @@ class RandomApod: LoadableObject {
             }
         
         state = .isLoading(last: last, cancelable)
+    }
+}
+
+class RandomApod: ApodList {
+    
+    override func makeRequest() -> ApodRequest {
+        var req = ApodRequest()
+        req.count = 30
+        
+        return req
+    }
+    
+}
+
+class TimeApod: ApodList {
+    
+    var endDate = Date()
+    
+    override func makeRequest() -> ApodRequest {
+        var req = ApodRequest()
+        req.end_date = self.endDate
+        
+        guard let start = Calendar.current.date(byAdding: .day, value: -30, to: self.endDate) else {
+            assert(false)
+        }
+        
+        req.start_date = start
+       
+        self.endDate = start
+        
+        return req
     }
 }
 

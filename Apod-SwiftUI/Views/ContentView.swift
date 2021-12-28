@@ -17,7 +17,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: self.$selection) {
-            RandomView()
+            GalleryView()
                 .tabItem(systemName: "sparkles.rectangle.stack", text: "Gallery")
             
             TodayView()

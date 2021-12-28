@@ -34,6 +34,7 @@ struct SettingView : View {
                             
                             Text(setting.apiKey)
                                 .foregroundColor(.secondary)
+                                .lineLimit(1)
                                 .truncationMode(.tail)
                         }
                     }

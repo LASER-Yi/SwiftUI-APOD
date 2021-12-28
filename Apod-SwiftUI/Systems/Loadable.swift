@@ -44,16 +44,10 @@ protocol LoadableObject: ObservableObject {
 extension LoadableObject {
     func cancel() {
         switch state {
-        case .isLoading(last: _, let cancelable):
+        case .isLoading(last: let last, let cancelable):
             cancelable?.cancel()
         default:
             break
-        }
-        
-        if let value = state.value {
-            state = .loaded(value)
-        } else {
-            state = .notRequested
         }
     }
 }

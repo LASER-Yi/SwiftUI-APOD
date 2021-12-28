@@ -15,14 +15,16 @@ final class RuntimeData: ObservableObject {
     
     var randoms: RandomApod = .init()
     
+    var time: TimeApod = .init()
+    
     // Use for preview only
     #if DEBUG
     static var preview: RuntimeData {
         let data = RuntimeData()
         
         data.today.state = .loaded(debugContent[0])
-        
         data.randoms.state = .loaded(debugContent)
+        data.time.state = .loaded(debugContent)
         
         return data
     }

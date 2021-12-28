@@ -47,6 +47,7 @@ struct TodayView: View {
                             Text("© \(copyright)")
                                 .font(.caption)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding([.vertical], 12)
                         }
                     }
                     .padding()
